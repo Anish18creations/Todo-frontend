@@ -45,8 +45,8 @@ export default function Settings() {
     e.preventDefault();
     const old = document.getElementById('old').value;
     if (formdata.password){
-      console.log(old);
-      console.log(ogpassword);
+      /*console.log(old);
+      console.log(ogpassword);*/
     if (old !== ogpassword)
     {
       toast.error("Please enter your original password correctly to proceed!!" , { duration: 2000 });
@@ -69,6 +69,8 @@ export default function Settings() {
     if (response.success == 'p') {
       toast.success(response.message , { duration: 1000 });
       localStorage.setItem('password' , response.password);
+      document.getElementById('old').value = '';
+      setformdata({ ...formdata, [formdata.password]: "" });
       return;
     }
 
@@ -82,6 +84,8 @@ export default function Settings() {
       toast.success(response.message , { duration: 1000 });
       localStorage.setItem('username' , response.name);
       localStorage.setItem('password' , response.password);
+      document.getElementById('old').value = '';
+      setformdata({ ...formdata, [formdata.password]: "" });
       return;
     }
 
