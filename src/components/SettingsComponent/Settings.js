@@ -45,6 +45,8 @@ export default function Settings() {
     e.preventDefault();
     const old = document.getElementById('old').value;
     if (formdata.password){
+      console.log(old);
+      console.log(ogpassword);
     if (old !== ogpassword)
     {
       toast.error("Please enter your original password correctly to proceed!!" , { duration: 2000 });
