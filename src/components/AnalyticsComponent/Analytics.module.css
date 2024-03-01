@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+body{
+    cursor: default;
+}
+
+.menu{
+    position: absolute;
+    width: 15vw;
+    height: 100vh;
+    border: 0rem 0.06rem 0rem 0rem;
+}
+
+.main{
+    position: absolute;
+    width: 85vw;
+    height: 100vh;
+    left: 15vw;
+    font-family: "Poppins", sans-serif;
+}
+
+.promanage{
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: black;
+    margin-left: 1vw;
+    margin-top: 0.5vh;
+}
+
+.board{
+    display: flex;
+    width: 15vw;
+    height: fit-content;
+    margin-top: 3vh;
+}
+
+.board:hover{
+    background:#EDF5FE;
+}
+
+.logout{
+    width: fit-content;
+    height: fit-content;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #CF3636;
+    margin-left: 0.7vw;
+}
+
+.analytics{
+    margin-left: 2vw;
+    margin-top: 2.6vh;
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.2rem;
+    font-weight: 650;
+    color: #000000;
+}
+
+.twosections{
+    display: flex;
+    margin-left: 4vw;
+    margin-top: 10vh;
+}
+
+.title{
+    font-family: "Open Sans", sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #000000;
+    margin-left: 0.7vw;
+    margin-top: -1.4vh;
+    width: 10vw;
+}
+
+.count{
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: #000000;
+    margin-left: 15vw;
+    margin-top: -1.58vh;
+}

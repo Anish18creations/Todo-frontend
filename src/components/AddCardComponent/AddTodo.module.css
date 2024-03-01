@@ -1,0 +1,223 @@
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--modalbg-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal {
+  background-color: var(--textWhite-color);
+  width: 38.625rem;
+  height: 29.6875rem;
+  padding: 1.5rem;
+  border-radius: 22px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
+}
+
+.titleContainer {
+  display: flex;
+  flex-direction: column;
+  font-weight: 500;
+}
+.titlebox {
+  cursor: pointer;
+  margin-top: 0.5rem;
+  border: 1px solid rgba(226, 226, 226, 1);
+  min-height: 2.5rem;
+  border-radius: 5px;
+  font-size: 400;
+  padding-left: 1rem;
+  outline-color: var(--bgPrimary-color);
+}
+.astric {
+  color: red;
+}
+
+.priorityContainer {
+  margin-top: 1.5rem;
+  display: flex;
+  font-weight: 500;
+  align-items: center;
+}
+
+.priorityBtns {
+  display: flex;
+  margin-left: 1.2rem;
+}
+
+.priorityButton {
+  background: none;
+  border: 1px solid rgba(226, 226, 226, 1);
+  border-radius: 8px;
+  margin-right: 0.7rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  width: max-content;
+  height: 1.5rem;
+  font-weight: 600;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  color: rgba(118, 117, 117, 1);
+}
+
+.selected {
+  background-color: rgba(238, 236, 236, 1);
+}
+
+.radio {
+  appearance: none;
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background-color: var(--radio-color);
+  outline: none;
+  margin-right: 0.3rem;
+}
+
+.highPriority {
+  background-color: rgba(255, 36, 115, 1);
+}
+
+.moderatePriority {
+  background-color: rgba(24, 176, 255, 1);
+}
+
+.lowPriority {
+  background-color: rgba(99, 192, 91, 1);
+}
+
+/* Sublist Designing */
+.checklistTitleContainer {
+  margin-top: 1rem;
+}
+.sublistContainer {
+  align-items: center;
+  height: calc(29.6875rem - 15rem);
+  overflow-y: auto;
+  margin-top: 1rem;
+}
+.subtaskContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.6rem;
+  min-height: 2.5rem;
+  border: 1px solid rgba(226, 226, 226, 1);
+  border-radius: 12px;
+  color: rgba(130, 130, 130, 1);
+}
+
+.checkbox {
+  margin-right: 8px;
+}
+
+.titleInput {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 1rem;
+}
+
+.removeButton {
+  margin-left: 8px;
+  background: none;
+  border: none;
+  color: red;
+  cursor: pointer;
+}
+
+.checkbox {
+  content: "";
+  margin-left: 0.7rem;
+  margin-right: 8px;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #ccc;
+  border-radius: 6px;
+}
+
+.checkbox:checked::before {
+  content: "\2713";
+  display: block;
+  width: 100%;
+  height: 100%;
+  border-radius: 6px;
+  text-align: center;
+  font-size: 12px;
+  background-color: var(--bgPrimary-color);
+  line-height: 16px;
+  color: white;
+}
+.checkbox:checked {
+  border: none;
+}
+.addsubtaskbtn {
+  cursor: pointer;
+  background: none;
+  border: none;
+  display: flex;
+  gap: 0.5rem;
+  font-size: 1rem;
+  color: rgba(118, 117, 117, 1);
+  align-items: center;
+  font-weight: 500;
+}
+
+.buttonContainer {
+  height: 6rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.actionHere {
+  display: flex;
+  gap: 1rem;
+}
+.dateBtn {
+  position: absolute;
+}
+.customButton {
+  display: inline-block;
+  padding: 0.5em 1em;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 0.25em;
+  cursor: pointer;
+}
+
+.customButton:hover {
+  background-color: #0056b3;
+}
+.actionHere > button {
+  cursor: pointer;
+  height: 2.5125rem;
+  width: 8.525rem;
+  border-radius: 0.75rem;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  transition: transform 0.2s ease;
+}
+
+.actionHere > button:hover {
+  transform: translateY(-3px);
+}
+.cancelBtn {
+  border: 1px solid rgba(207, 54, 54, 1);
+  background-color: var(--textWhite-color);
+  color: rgba(207, 54, 54, 1);
+}
+.saveBtn {
+  background-color: var(--bgPrimary-color);
+  border: 1px solid var(--bgPrimary-color);
+  color: var(--textWhite-color);
+}

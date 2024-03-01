@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+body{
+    cursor: default;
+}
+
+.popupcontainer{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #303D438C;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup{
+    position: absolute;
+    left: 30vw;
+    top: 25vh;
+    width: 40vw;
+    height: 50vh;
+    background: #FFFFFF;
+    border-radius: 1.1rem;
+}
+
+.title{
+    width: fit-content;
+    height: fit-content;
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-size: 0.8rem;
+    color: #20102B;
+}
+
+.tasktitle{
+    margin-left: 3vw;
+    margin-top: 1vh;
+    width: 33vw;
+    height: 3.5vh;
+    background: #FFFFFF;
+    border-radius: 0.25rem;
+    border-color: #E2E2E2;
+    border-style: solid;
+    outline: none;
+    border-width: 0.06rem;
+    padding-left: 1vw;
+    color: #9B959F;
+    font-family: "Inter", sans-serif;
+    font-weight: 400;
+    font-size: 0.8rem;
+}
+
+.selectpriority{
+    color: #20102B;
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-size: 0.8rem;
+    width: fit-content;
+    height: fit-content;
+    letter-spacing: 0.02rem;
+    margin-top: 0.7vh;
+}
+
+.priority{
+    display: flex;
+    margin-left: 0.65vw;
+    width: 7vw;
+    height: 2.5vh;
+    padding-left: 0.5vw;
+    padding-top: 0.5vh;
+    border-style: solid;
+    outline: none;
+    border-radius: 0.5rem;
+    border-width: 0.06rem;
+    border-color: #E2E2E2;
+}
+
+.red{
+    border-radius: 50%;
+    background: #FF2473;
+    width: 0.4rem;
+    height: 0.4rem;
+    margin-top: 0.5vh;
+}
+
+.highpriority{
+    margin-left: 0.5vw;
+    width: fit-content;
+    height: fit-content;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 0.6rem;
+    color: #767575;
+}
+
+.priority:hover{
+    background: #EEECEC;
+}
+
+.cancel{
+    margin-left: 8vw;
+    width: 9vw;
+    height: 4vh;
+    border-radius: 0.5rem;
+    border-width: 0.06rem;
+    border-color: #CF3636;
+    border-style: solid;
+    text-align: center;
+    background: white;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: #CF3636;
+    padding-top: 1vh;
+    box-shadow: 0rem 0.12rem 0.7rem 0rem #82698C33;
+}
+
+.save{
+    margin-left: 0.8vw;
+    width: 9vw;
+    height: 4vh;
+    border-radius: 0.5rem;
+    border-width: 0.06rem;
+    border-color: #17A2B8;
+    border-style: solid;
+    text-align: center;
+    background: #17A2B8;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: white;
+    padding-top: 1vh;
+    box-shadow: 0rem 0.12rem 0.7rem 0rem #82698C33;
+}
+
+.date{
+    width: 7vw;
+}
+
+.checklisttitle{
+    margin-left: 3vw;
+    margin-top: 3vh;
+    font-family: "Inter", sans-serif;
+    font-weight: 600;
+    font-size: 0.75rem;
+    color: black;
+}
+
+.checklist{
+    width: 36vw;
+    height: 15vh;
+    overflow: auto;
+    margin-left: 3vw;
+    scrollbar-width: thin;
+}
+
+.box{
+    width: 35vw;
+    height: 4vh;
+    margin-top: 1vh;
+    border-radius: 0.5rem;
+    border-width: 0.06rem;
+    border-style: solid;
+    border-color: #E2E2E2;
+    display: flex;
+}
+
+.addnew{
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-size: 0.8rem;
+    color: #767575;
+    margin-top: 2vh;
+    margin-left: 0.3vw;
+}
+
+.checkbox{
+    border-radius: 0.25rem;
+    border-width: 0.12rem;
+    margin-left: 0.7vw;
+}
+
+input[type="checkbox"]:checked {
+    accent-color: #17A2B8;
+}
+
+.inputchecklist{
+    margin-top: 0.2vh;
+    margin-left: 0.2vw;
+    width: 30vw;
+    height: 3vh;
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-size: 0.8rem;
+    color: black;
+    outline: none;
+    border: none;
+}
+
+.delete{
+    width: 1vw;
+    height: 2vh;
+    margin-left: 1vw;
+    margin-top: 1vh;
+}

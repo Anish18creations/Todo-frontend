@@ -1,0 +1,139 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+body{
+    cursor: default;
+}
+
+.bg{
+    background-color: #17A2B8;
+    width: 55vw;
+    height: 100vh;
+}
+
+.circle{
+    position: absolute;
+    top: 16vh;
+    left: 20.4vw;
+    width: 13.6vw;
+    height: 40vh;
+    border-radius: 50%;
+    background: #317F8B;
+
+}
+
+.bot{
+    position: absolute;
+    top: 20vh;
+    left: 21vw;
+    width: 10rem;
+    height: 15rem;
+}
+
+.welcometext{
+    position: absolute;
+    top: 65vh;
+    left: 16vw;
+    width: fit-content;
+    height: fit-content;
+    font-family: 'Open Sans' , sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #FFFFFF;
+}
+
+.login{
+    position: absolute;
+    top: 15.5vh;
+    right: 21vw;
+    width: fit-content;
+    height: fit-content;
+    font-family: 'Open Sans' , sans-serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #343434;
+}
+
+.namebox{
+    position: absolute;
+    top: 19vh;
+    right: 8vw;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 0.5rem;
+    border-width: 0.06rem;
+    border-color: #D0D0D0;
+    border-style: solid;
+    display: flex;
+    color: #828282;
+    font-weight: 400;
+    font-family: 'Open Sans' , sans-serif;
+    font-size: 0.8rem;
+}
+
+.loginbtn{
+    position: absolute;
+    top: 56vh;
+    right: 7.9vw;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 3rem;
+    border-color: #17A2B8;
+    border-style: solid;
+    color: white;
+    font-weight: 400;
+    font-family: 'Open Sans' , sans-serif;
+    font-size: 0.8rem;
+    background: #17A2B8;
+    text-align: center;
+    padding-left: 13.7vw;
+    padding-right: 13.7vw;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+}
+
+.havenoacc{
+    position: absolute;
+    top: 65vh;
+    right: 19vw;
+    width: fit-content;
+    height: fit-content;
+    color: #828282;
+    font-weight: 400;
+    font-family: 'Open Sans' , sans-serif;
+    font-size: 0.8rem;
+}
+
+.registerbtn{
+    position: absolute;
+    top: 71vh;
+    right: 7.9vw;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 3rem;
+    border-color: #17A2B8;
+    border-style: solid;
+    border-width: 0.06rem;
+    color: #17A2B8;
+    font-weight: 400;
+    font-family: 'Open Sans' , sans-serif;
+    font-size: 0.8rem;
+    background: white;
+    text-align: center;
+    padding-left: 13.3vw;
+    padding-right: 13.3vw;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+}
+
+.customemail{
+    width: fit-content;
+    height: fit-content;
+    color: #DB371F;
+    position: absolute;
+    top: 38.7vh;
+    right: 24.4vw;
+    font-family: "Inter", sans-serif ;
+    font-size: 0.8rem;
+    font-weight: 400;
+}

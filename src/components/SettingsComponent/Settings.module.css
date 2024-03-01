@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
+
+body{
+    cursor: default;
+}
+
+.menu{
+    position: absolute;
+    width: 15vw;
+    height: 100vh;
+    border: 0rem 0.06rem 0rem 0rem;
+}
+
+.main{
+    position: absolute;
+    width: 85vw;
+    height: 100vh;
+    left: 15vw;
+    font-family: "Poppins", sans-serif;
+}
+
+.promanage{
+    font-family: "Poppins", sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: black;
+    margin-left: 1vw;
+    margin-top: 0.5vh;
+}
+
+.board{
+    display: flex;
+    width: 15vw;
+    height: fit-content;
+    margin-top: 3vh;
+}
+
+.board:hover{
+    background:#EDF5FE;
+}
+
+.logout{
+    width: fit-content;
+    height: fit-content;
+    font-family: "Poppins", sans-serif;
+    font-weight: 500;
+    font-size: 0.9rem;
+    color: #CF3636;
+    margin-left: 0.7vw;
+}
+
+.settings{
+    margin-left: 2vw;
+    margin-top: 2.6vh;
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.2rem;
+    font-weight: 650;
+    color: #000000;
+}
+
+.namebox{
+    margin-left: 2vw;
+    margin-top: 3.5vh;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 0.5rem;
+    border-width: 0.06rem;
+    border-color: #D0D0D0;
+    border-style: solid;
+    display: flex;
+    color: #828282;
+    font-weight: 400;
+    font-family: 'Open Sans' , sans-serif;
+    font-size: 0.8rem;
+}
+
+.updatebtn{
+    margin-left: 2vw;
+    margin-top: 3.5vh;
+    width: fit-content;
+    height: fit-content;
+    border-radius: 3rem;
+    border-color: #17A2B8;
+    border-style: solid;
+    color: white;
+    font-weight: 400;
+    font-family: 'Open Sans' , sans-serif;
+    font-size: 0.8rem;
+    background: #17A2B8;
+    text-align: center;
+    padding-left: 13.65vw;
+    padding-right: 13.65vw;
+    padding-top: 1vh;
+    padding-bottom: 1vh;
+}
