@@ -55,11 +55,11 @@ export default function Home() {
     fetchcarddetails();
   }, [])
 
-  useEffect(() => {
+ /*useEffect(() => {
     console.log('mounting the page');
     /*settodotasks(JSON.parse(localStorage.getItem('todotasks')));
     setinprogresstasks(JSON.parse(localStorage.getItem('inprogresstasks')));*/
-  } , [todotoprogress]);
+  /*} , [todotoprogress]);*/
 
   const fetchcarddetails = async () => {
     const response = await cardinfo();
