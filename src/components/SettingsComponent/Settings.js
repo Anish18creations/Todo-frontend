@@ -70,7 +70,7 @@ export default function Settings() {
       toast.success(response.message , { duration: 1000 });
       localStorage.setItem('password' , response.password);
       document.getElementById('old').value = '';
-      setformdata({ ...formdata, [formdata.password]: "" });
+      document.getElementById('new').value = '';
       return;
     }
 
@@ -85,7 +85,7 @@ export default function Settings() {
       localStorage.setItem('username' , response.name);
       localStorage.setItem('password' , response.password);
       document.getElementById('old').value = '';
-      setformdata({ ...formdata, [formdata.password]: "" });
+      document.getElementById('new').value = '';
       return;
     }
 
@@ -156,7 +156,7 @@ export default function Settings() {
                 <input type = { data2 ? "password" : "text" } placeholder='New Password' style={{
                     borderColor: 'white', borderStyle: 'solid', width: '23.2vw',
                     color: '#828282', paddingRight: '2rem', outline: 'none'
-                }} spellCheck='false' required onChange={handlechange}
+                }} spellCheck='false' required onChange={handlechange} id='new'
                 name='password' value={formdata.password}>
                 </input>
                 <img src={showPassword2} alt='' style={{ width: '1.5rem', height: '1.5rem' , padding: '0.5rem', paddingRight:'0rem'}} 
