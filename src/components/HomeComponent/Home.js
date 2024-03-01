@@ -50,8 +50,10 @@ export default function Home() {
   }
 
   useEffect(() => {
-    if(!localStorage.getItem('token'))
-    navigate('/');
+    if(!localStorage.getItem('token')){
+      navigate('/login');
+    }
+   
     fetchcarddetails();
   }, [])
 
