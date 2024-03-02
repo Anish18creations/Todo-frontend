@@ -12,6 +12,7 @@ import Logout from '../LogoutComponent/Logout';
 import { useNavigate } from 'react-router-dom';
 import { cardinfo } from '../../apis/todo';
 import expandforone from '../../assets/images/expandone.png';
+import moment from "moment";
 
 export default function Home() {
 
@@ -52,6 +53,13 @@ export default function Home() {
     if(!localStorage.getItem('token')){
       navigate('/login');
     }
+
+    /*const startDate = moment("2023-03-03");
+    const endDate = moment("Apr 14th");
+
+    const daysBetweenDates = endDate.diff(startDate, "days");
+
+    console.log(daysBetweenDates);*/
     
     fetchcarddetails();
     }, [cardmove])
@@ -233,7 +241,7 @@ export default function Home() {
                                 {task.checklists.map((item) => (
                                   <>
                                     <div className={styles.box}>
-                                      <input type='checkbox' checked={item.done} />
+                                      <input type='checkbox' style={{marginTop:'1.15vh'}} checked={item.done} />
                                       <div className={styles.taskname}>{item.taskname}</div>
                                     </div>
                                     <div style={{ height: '2vh' }} />
@@ -331,7 +339,7 @@ export default function Home() {
                                 {task.checklists.map((item) => (
                                   <>
                                     <div className={styles.box}>
-                                      <input type='checkbox' checked={item.done} />
+                                      <input type='checkbox' style={{marginTop:'1.15vh'}} checked={item.done} />
                                       <div className={styles.taskname}>{item.taskname}</div>
                                     </div>
                                     <div style={{ height: '2vh' }} />
@@ -429,7 +437,7 @@ export default function Home() {
                                 {task.checklists.map((item) => (
                                   <>
                                     <div className={styles.box}>
-                                      <input type='checkbox' checked={item.done} />
+                                      <input type='checkbox' style={{marginTop:'1.15vh'}} checked={item.done} />
                                       <div className={styles.taskname}>{item.taskname}</div>
                                     </div>
                                     <div style={{ height: '2vh' }} />

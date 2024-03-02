@@ -183,7 +183,7 @@ input[type='checkbox'] {
     border-radius: 0.4rem;
     border: 0.125rem solid #17A2B8;
     margin-left: 0.8vw;
-    margin-top: 1.4vh;
+    /*margin-top: 10.7vh;*/
 }
 
 .taskname {
