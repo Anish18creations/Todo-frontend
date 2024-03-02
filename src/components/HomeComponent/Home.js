@@ -35,11 +35,10 @@ export default function Home() {
 
   let [buttonpopup, setbuttonpopup] = useState(false);
   let [buttonlogout, setbuttonlogout] = useState(false);
-  let [carddetails, setcarddetails] = useState();
-  let [todotasks, settodotasks] = useState();
-  let [inprogresstasks, setinprogresstasks] = useState();
+  let [todotasks, settodotasks] = useState([]);
+  let [inprogresstasks, setinprogresstasks] = useState([]);
   let [backlogtasks, setbacklogtasks] = useState([]);
-  let [todotoprogress , settodotoprogress] = useState(false);
+  let [cardmove , setcardmove] = useState(false);
 
   const addcard = () => {
     setbuttonpopup(true);
@@ -53,47 +52,85 @@ export default function Home() {
     if(!localStorage.getItem('token')){
       navigate('/login');
     }
-   
+    
     fetchcarddetails();
-  }, [])
-
- /*useEffect(() => {
-    console.log('mounting the page');
-    /*settodotasks(JSON.parse(localStorage.getItem('todotasks')));
-    setinprogresstasks(JSON.parse(localStorage.getItem('inprogresstasks')));*/
-  /*} , [todotoprogress]);*/
+    }, [cardmove])
 
   const fetchcarddetails = async () => {
     const response = await cardinfo();
-    console.log(response);
-    setcarddetails(response);
-    settodotasks(response);
-    localStorage.setItem('todotasks' , JSON.stringify(todotasks));
+    if(!localStorage.getItem('todotasks')){
+      settodotasks(response);
+      localStorage.setItem('todotasks' , JSON.stringify(response));
+      console.log(JSON.parse(localStorage.getItem('todotasks')));
+    }
+    else
+    settodotasks(JSON.parse(localStorage.getItem('todotasks')));
+    
+    if(localStorage.getItem('inprogresstasks'))
+    setinprogresstasks(JSON.parse(localStorage.getItem('inprogresstasks')));
+
+    if(localStorage.getItem('backlogtasks'))
+    setbacklogtasks(JSON.parse(localStorage.getItem('backlogtasks')));
   }
 
-  const Progress = (i) => {
-    console.log(i);
+  const todotoProgress = (i) => {
+    
     const newItems = todotasks.splice(i, 1);
-    console.log(newItems[0]);
-    inprogresstasks.push(newItems);
+    inprogresstasks.push(newItems[0]);
     setinprogresstasks(inprogresstasks);
-    console.log(inprogresstasks);
-    console.log(todotasks);
     localStorage.setItem('todotasks' , JSON.stringify(todotasks));
     localStorage.setItem('inprogresstasks' , JSON.stringify(inprogresstasks));
-    settodotoprogress((prev) => !prev);
+    setcardmove((prev) => !prev);
   }
 
-  const Backlog = (i) => {
-    console.log(i);
+  const todotoBacklog = (i) => {
 
     const newItems = todotasks.splice(i, 1);
-    console.log(newItems);
     backlogtasks.push(newItems[0]);
     setbacklogtasks(backlogtasks);
-    console.log(inprogresstasks);
-    console.log(todotasks);
-    settodotoprogress((prev) => !prev);
+    localStorage.setItem('todotasks' , JSON.stringify(todotasks));
+    localStorage.setItem('backlogtasks' , JSON.stringify(backlogtasks));
+    setcardmove((prev) => !prev);
+  }
+
+  const inprogresstoBacklog = (i) => {
+
+    const newItems = inprogresstasks.splice(i, 1);
+    backlogtasks.push(newItems[0]);
+    setbacklogtasks(backlogtasks);
+    localStorage.setItem('inprogresstasks' , JSON.stringify(inprogresstasks));
+    localStorage.setItem('backlogtasks' , JSON.stringify(backlogtasks));
+    setcardmove((prev) => !prev);
+  }
+
+  const inprogresstoTodo = (i) => {
+
+    const newItems = inprogresstasks.splice(i, 1);
+    todotasks.push(newItems[0]);
+    settodotasks(todotasks);
+    localStorage.setItem('inprogresstasks' , JSON.stringify(inprogresstasks));
+    localStorage.setItem('todotasks' , JSON.stringify(todotasks));
+    setcardmove((prev) => !prev);
+  }
+
+  const backlogtoTodo = (i) => {
+
+    const newItems = backlogtasks.splice(i, 1);
+    todotasks.push(newItems[0]);
+    settodotasks(todotasks);
+    localStorage.setItem('backlogtasks' , JSON.stringify(backlogtasks));
+    localStorage.setItem('todotasks' , JSON.stringify(todotasks));
+    setcardmove((prev) => !prev);  
+  }
+
+  const backlogtoInprogress = (i) => {
+
+    const newItems = backlogtasks.splice(i, 1);
+    inprogresstasks.push(newItems[0]);
+    setinprogresstasks(inprogresstasks);
+    localStorage.setItem('backlogtasks' , JSON.stringify(backlogtasks));
+    localStorage.setItem('inprogresstasks' , JSON.stringify(inprogresstasks));
+    setcardmove((prev) => !prev); 
   }
 
   return (
@@ -102,7 +139,7 @@ export default function Home() {
         <div className={styles.menu}>
           <div style={{ display: 'flex', marginTop: '3vh', marginLeft: '3vw' }}>
             <img src={promanage} alt='' />
-            <div className={styles.promanage}>Pro Manage</div>
+            <div className={styles.promanage} onClick={()=>{console.log(todotasks)}}>Pro Manage</div>
           </div>
 
           <div className={styles.board} style={{ background: '#EDF5FE' }}>
@@ -210,16 +247,16 @@ export default function Home() {
                                   <>
                                     <div className={styles.lastline}>
                                       <div className={styles.display}>{task.duedate}</div>
-                                      <div className={styles.backlog} style={{ marginLeft: '3.5vw' }} /*onClick={()=>Backlog(index)}*/>TO-DO</div>
-                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} /*onClick={()=>Progress(index)}*/>PROGRESS</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '3.5vw' }} onClick={()=>backlogtoTodo(index)}>TO-DO</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={()=>backlogtoInprogress(index)}>PROGRESS</div>
                                       <div className={styles.backlog} style={{ marginLeft: '0.5vw' }}>DONE</div>
                                     </div>
                                   </>
                                   :
                                   <>
                                     <div className={styles.lastline}>
-                                      <div className={styles.backlog} style={{ marginLeft: '7.5vw' }} /*onClick={()=>Backlog(index)}*/>TO-DO</div>
-                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} /*onClick={()=>Progress(index)}*/>PROGRESS</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '7.5vw' }} onClick={()=>backlogtoTodo(index)}>TO-DO</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={()=>backlogtoInprogress(index)}>PROGRESS</div>
                                       <div className={styles.backlog} style={{ marginLeft: '0.5vw' }}>DONE</div>
                                     </div>
                                   </>
@@ -308,16 +345,16 @@ export default function Home() {
                                   <>
                                     <div className={styles.lastline}>
                                       <div className={styles.display}>{task.duedate}</div>
-                                      <div className={styles.backlog} style={{ marginLeft: '3.5vw' }} onClick={()=>Backlog(index)}>BACKLOG</div>
-                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={()=>Progress(index)}>PROGRESS</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '3.5vw' }} onClick={()=>todotoBacklog(index)}>BACKLOG</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={()=>todotoProgress(index)}>PROGRESS</div>
                                       <div className={styles.backlog} style={{ marginLeft: '0.5vw' }}>DONE</div>
                                     </div>
                                   </>
                                   :
                                   <>
                                     <div className={styles.lastline}>
-                                      <div className={styles.backlog} style={{ marginLeft: '7.5vw' }} onClick={()=>Backlog(index)}>BACKLOG</div>
-                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={()=>Progress(index)}>PROGRESS</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '7.5vw' }} onClick={()=>todotoBacklog(index)}>BACKLOG</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={()=>todotoProgress(index)}>PROGRESS</div>
                                       <div className={styles.backlog} style={{ marginLeft: '0.5vw' }}>DONE</div>
                                     </div>
                                   </>
@@ -347,7 +384,7 @@ export default function Home() {
                   inprogresstasks ?
                     <>
                       {
-                        inprogresstasks.map((task) => (
+                        inprogresstasks.map((task , index) => (
                           <>
                             <div className={styles.container}>
                               <div style={{ display: 'flex', marginLeft: '1vw' }}>
@@ -406,16 +443,16 @@ export default function Home() {
                                   <>
                                     <div className={styles.lastline}>
                                       <div className={styles.display}>{task.duedate}</div>
-                                      <div className={styles.backlog} style={{ marginLeft: '3.5vw' }}>BACKLOG</div>
-                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }}>TO-DO</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '3.5vw' }} onClick={()=>inprogresstoBacklog(index)}>BACKLOG</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={()=>inprogresstoTodo(index)}>TO-DO</div>
                                       <div className={styles.backlog} style={{ marginLeft: '0.5vw' }}>DONE</div>
                                     </div>
                                   </>
                                   :
                                   <>
                                     <div className={styles.lastline}>
-                                      <div className={styles.backlog} style={{ marginLeft: '7.5vw' }}>BACKLOG</div>
-                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }}>TO-DO</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '7.5vw' }} onClick={()=>inprogresstoBacklog(index)}>BACKLOG</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={()=>inprogresstoTodo(index)}>TO-DO</div>
                                       <div className={styles.backlog} style={{ marginLeft: '0.5vw' }}>DONE</div>
                                     </div>
                                   </>

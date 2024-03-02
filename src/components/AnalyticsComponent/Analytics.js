@@ -16,6 +16,9 @@ export default function Analytics() {
   let [high,sethigh] = useState();
   let [moderate,setmoderate] = useState();
   let [low,setlow] = useState();
+  let [noofbacklogtasks , setnoofbacklogtasks] = useState();
+  let [nooftodotasks , setnooftodotasks] = useState();
+  let [noofinprogresstasks , setnoofinprogresstasks] = useState();
   let response ;
 
   const logoutbox = () => {
@@ -31,6 +34,14 @@ export default function Analytics() {
     sethigh(response.highpriority);
     setmoderate(response.moderatepriority);
     setlow(response.lowpriority);
+    if(localStorage.getItem('todotasks'))
+    setnooftodotasks(JSON.parse(localStorage.getItem('todotasks')).length);
+    if(localStorage.getItem('backlogtasks'))
+    setnoofbacklogtasks(JSON.parse(localStorage.getItem('backlogtasks')).length);
+    if(localStorage.getItem('inprogresstasks'))
+    setnoofinprogresstasks(JSON.parse(localStorage.getItem('inprogresstasks')).length);
+
+    console.log(noofbacklogtasks , noofinprogresstasks , nooftodotasks);
   }
 
   
@@ -71,19 +82,19 @@ export default function Analytics() {
           <div style={{display:'flex'}}>
             <div style={{width:'0.5rem' , height:'0.5rem', background:'#90C4CC' , borderRadius:'50%'}}/>
             <div className={styles.title}>Backlog Tasks</div>
-            <div className={styles.count}>15</div>
+            <div className={styles.count}>{noofbacklogtasks}</div>
           </div>
           <br/>
           <div style={{display:'flex'}}>
             <div style={{width:'0.5rem' , height:'0.5rem', background:'#90C4CC' , borderRadius:'50%'}}/>
             <div className={styles.title}>To-do Tasks</div>
-            <div className={styles.count}>15</div>
+            <div className={styles.count}>{nooftodotasks}</div>
           </div>
           <br/>
           <div style={{display:'flex'}}>
             <div style={{width:'0.5rem' , height:'0.5rem', background:'#90C4CC' , borderRadius:'50%'}}/>
             <div className={styles.title}>In-Progress Tasks</div>
-            <div className={styles.count}>15</div>
+            <div className={styles.count}>{noofinprogresstasks}</div>
           </div>
           <br/>
           <div style={{display:'flex'}}>
