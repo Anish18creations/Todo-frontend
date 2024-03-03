@@ -166,7 +166,6 @@ body{
     background: white;
     scrollbar-width: thin;
     margin-top: 2vh;
-    /*padding-bottom: 2vh;*/
 }
 
 .box {
@@ -183,7 +182,6 @@ input[type='checkbox'] {
     border-radius: 0.4rem;
     border: 0.125rem solid #17A2B8;
     margin-left: 0.8vw;
-    /*margin-top: 10.7vh;*/
 }
 
 .taskname {

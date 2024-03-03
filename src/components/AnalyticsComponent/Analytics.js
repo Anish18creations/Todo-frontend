@@ -19,6 +19,7 @@ export default function Analytics() {
   let [noofbacklogtasks , setnoofbacklogtasks] = useState();
   let [nooftodotasks , setnooftodotasks] = useState();
   let [noofinprogresstasks , setnoofinprogresstasks] = useState();
+  let [noofdonetasks , setnoofdonetasks] = useState();
   let response ;
 
   const logoutbox = () => {
@@ -30,18 +31,27 @@ export default function Analytics() {
   })
 
   const fetchnoofjobs = async() =>{
-     response = await AnalyticsofCards();
+    response = await AnalyticsofCards();
     sethigh(response.highpriority);
     setmoderate(response.moderatepriority);
     setlow(response.lowpriority);
     if(localStorage.getItem('todotasks'))
-    setnooftodotasks(JSON.parse(localStorage.getItem('todotasks')).length);
-    if(localStorage.getItem('backlogtasks'))
-    setnoofbacklogtasks(JSON.parse(localStorage.getItem('backlogtasks')).length);
-    if(localStorage.getItem('inprogresstasks'))
-    setnoofinprogresstasks(JSON.parse(localStorage.getItem('inprogresstasks')).length);
+      setnooftodotasks(JSON.parse(localStorage.getItem('todotasks')).length);
 
-    console.log(noofbacklogtasks , noofinprogresstasks , nooftodotasks);
+    if(localStorage.getItem('backlogtasks'))
+      setnoofbacklogtasks(JSON.parse(localStorage.getItem('backlogtasks')).length);
+    else
+      setnoofbacklogtasks(0);
+
+    if(localStorage.getItem('inprogresstasks'))
+      setnoofinprogresstasks(JSON.parse(localStorage.getItem('inprogresstasks')).length);
+    else
+      setnoofinprogresstasks(0);
+
+    if(localStorage.getItem('donetasks'))
+      setnoofdonetasks(JSON.parse(localStorage.getItem('donetasks')).length);
+    else
+      setnoofdonetasks(0);
   }
 
   
@@ -100,7 +110,7 @@ export default function Analytics() {
           <div style={{display:'flex'}}>
             <div style={{width:'0.5rem' , height:'0.5rem', background:'#90C4CC' , borderRadius:'50%'}}/>
             <div className={styles.title}>Completed Tasks</div>
-            <div className={styles.count}>15</div>
+            <div className={styles.count}>{noofdonetasks}</div>
           </div>
         </div>
 

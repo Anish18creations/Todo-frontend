@@ -13,6 +13,7 @@ import { useNavigate } from 'react-router-dom';
 import { cardinfo } from '../../apis/todo';
 import expandforone from '../../assets/images/expandone.png';
 import moment from "moment";
+import { checkallcheckboxes } from '../../apis/todo';
 
 export default function Home() {
 
@@ -39,7 +40,9 @@ export default function Home() {
   let [todotasks, settodotasks] = useState([]);
   let [inprogresstasks, setinprogresstasks] = useState([]);
   let [backlogtasks, setbacklogtasks] = useState([]);
+  let [donetasks , setdonetasks] = useState([]);
   let [cardmove , setcardmove] = useState(false);
+  let [demo , setdemo] = useState([]);
 
   const addcard = () => {
     setbuttonpopup(true);
@@ -79,6 +82,9 @@ export default function Home() {
 
     if(localStorage.getItem('backlogtasks'))
     setbacklogtasks(JSON.parse(localStorage.getItem('backlogtasks')));
+
+    if(localStorage.getItem('donetasks'))
+    setdonetasks(JSON.parse(localStorage.getItem('donetasks')));
   }
 
   const todotoProgress = (i) => {
@@ -101,6 +107,17 @@ export default function Home() {
     setcardmove((prev) => !prev);
   }
 
+  const todotoDone = async(i , jobid) => {
+
+    const response = await checkallcheckboxes(jobid);
+    const newItems = todotasks.splice(i, 1);
+    donetasks.push(response);
+    setdonetasks(donetasks);
+    localStorage.setItem('todotasks' , JSON.stringify(todotasks));
+    localStorage.setItem('donetasks' , JSON.stringify(donetasks));
+    setcardmove((prev) => !prev); 
+  }
+
   const inprogresstoBacklog = (i) => {
 
     const newItems = inprogresstasks.splice(i, 1);
@@ -121,6 +138,17 @@ export default function Home() {
     setcardmove((prev) => !prev);
   }
 
+  const inprogresstoDone = async(i , jobid) => {
+
+    const response = await checkallcheckboxes(jobid);
+    const newItems = inprogresstasks.splice(i, 1);
+    donetasks.push(response);
+    setdonetasks(donetasks);
+    localStorage.setItem('inprogresstasks' , JSON.stringify(inprogresstasks));
+    localStorage.setItem('donetasks' , JSON.stringify(donetasks));
+    setcardmove((prev) => !prev); 
+  }
+
   const backlogtoTodo = (i) => {
 
     const newItems = backlogtasks.splice(i, 1);
@@ -138,6 +166,17 @@ export default function Home() {
     setinprogresstasks(inprogresstasks);
     localStorage.setItem('backlogtasks' , JSON.stringify(backlogtasks));
     localStorage.setItem('inprogresstasks' , JSON.stringify(inprogresstasks));
+    setcardmove((prev) => !prev); 
+  }
+
+  const backlogtoDone = async(i , jobid) => {
+
+    const response = await checkallcheckboxes(jobid);
+    const newItems = backlogtasks.splice(i, 1);
+    donetasks.push(response);
+    setdonetasks(donetasks);
+    localStorage.setItem('backlogtasks' , JSON.stringify(backlogtasks));
+    localStorage.setItem('donetasks' , JSON.stringify(donetasks));
     setcardmove((prev) => !prev); 
   }
 
@@ -257,7 +296,7 @@ export default function Home() {
                                       <div className={styles.display}>{task.duedate}</div>
                                       <div className={styles.backlog} style={{ marginLeft: '3.5vw' }} onClick={()=>backlogtoTodo(index)}>TO-DO</div>
                                       <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={()=>backlogtoInprogress(index)}>PROGRESS</div>
-                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }}>DONE</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={()=>backlogtoDone(index , task._id)}>DONE</div>
                                     </div>
                                   </>
                                   :
@@ -265,7 +304,7 @@ export default function Home() {
                                     <div className={styles.lastline}>
                                       <div className={styles.backlog} style={{ marginLeft: '7.5vw' }} onClick={()=>backlogtoTodo(index)}>TO-DO</div>
                                       <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={()=>backlogtoInprogress(index)}>PROGRESS</div>
-                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }}>DONE</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={()=>backlogtoDone(index , task._id)}>DONE</div>
                                     </div>
                                   </>
                               }
@@ -355,7 +394,7 @@ export default function Home() {
                                       <div className={styles.display}>{task.duedate}</div>
                                       <div className={styles.backlog} style={{ marginLeft: '3.5vw' }} onClick={()=>todotoBacklog(index)}>BACKLOG</div>
                                       <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={()=>todotoProgress(index)}>PROGRESS</div>
-                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }}>DONE</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={()=>todotoDone(index , task._id)}>DONE</div>
                                     </div>
                                   </>
                                   :
@@ -363,7 +402,7 @@ export default function Home() {
                                     <div className={styles.lastline}>
                                       <div className={styles.backlog} style={{ marginLeft: '7.5vw' }} onClick={()=>todotoBacklog(index)}>BACKLOG</div>
                                       <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={()=>todotoProgress(index)}>PROGRESS</div>
-                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }}>DONE</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={()=>todotoDone(index , task._id)}>DONE</div>
                                     </div>
                                   </>
                               }
@@ -453,7 +492,7 @@ export default function Home() {
                                       <div className={styles.display}>{task.duedate}</div>
                                       <div className={styles.backlog} style={{ marginLeft: '3.5vw' }} onClick={()=>inprogresstoBacklog(index)}>BACKLOG</div>
                                       <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={()=>inprogresstoTodo(index)}>TO-DO</div>
-                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }}>DONE</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={()=>inprogresstoDone(index , task._id)}>DONE</div>
                                     </div>
                                   </>
                                   :
@@ -461,7 +500,7 @@ export default function Home() {
                                     <div className={styles.lastline}>
                                       <div className={styles.backlog} style={{ marginLeft: '7.5vw' }} onClick={()=>inprogresstoBacklog(index)}>BACKLOG</div>
                                       <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={()=>inprogresstoTodo(index)}>TO-DO</div>
-                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }}>DONE</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={()=>inprogresstoDone(index , task._id)}>DONE</div>
                                     </div>
                                   </>
                               }
@@ -485,6 +524,95 @@ export default function Home() {
                 <img src={expand} className={styles.expand} style={{ marginLeft: '15.5vw' }} alt='' />
               </div>
 
+              <div className={styles.displaytodotasks}>
+                {
+                  donetasks ?
+                    <>
+                      {
+                        donetasks.map((task , index) => (
+                          <>
+                            <div className={styles.container}>
+                              <div style={{ display: 'flex', marginLeft: '1vw' }}>
+                                <div style={{
+                                  width: '0.5rem', height: '0.5rem', borderRadius: '50%', marginTop: '2vh',
+                                  backgroundColor:
+                                    (task.priority == 'HIGH PRIORITY')
+                                      ?
+                                      '#FF2473'
+                                      :
+                                      (task.priority == 'LOW PRIORITY')
+                                        ?
+                                        '#63C05B'
+                                        :
+                                        '#18B0FF'
+                                }}
+                                />
+                                <div className={styles.priority}>{task.priority}</div>
+                                <div style={{
+                                  width: '0.125rem', height: '0.125rem', borderRadius: '50%', borderStyle: 'solid',
+                                  borderWidth: '0.08rem', background: 'black', marginLeft: '7vw', marginTop: '2.5vh'
+                                }}></div>
+                                <div style={{
+                                  width: '0.125rem', height: '0.125rem', borderRadius: '50%', borderStyle: 'solid',
+                                  borderWidth: '0.08rem', background: 'black', marginLeft: '0.2vw', marginTop: '2.5vh'
+                                }}></div>
+                                <div style={{
+                                  width: '0.125rem', height: '0.125rem', borderRadius: '50%', borderStyle: 'solid',
+                                  borderWidth: '0.08rem', background: 'black', marginLeft: '0.2vw', marginTop: '2.5vh'
+                                }}></div>
+                              </div>
+                              <div className={styles.title}>{task.title}</div>
+                              <div style={{ display: 'flex' }}>
+                                <div className={styles.checklist}>Checklist (
+                                  {task.checklists.filter((item) => item.done === true).length}
+                                  /{task.checklists.length})
+                                </div>
+                                <img src={expandforone} style={{ marginLeft: '7vw' }} alt='' />
+                              </div>
+                              <div className={styles.checklistdisplay}>
+
+                                {task.checklists.map((item) => (
+                                  <>
+                                    <div className={styles.box}>
+                                      <input type='checkbox' style={{marginTop:'1.15vh'}} checked={item.done} />
+                                      <div className={styles.taskname}>{item.taskname}</div>
+                                    </div>
+                                    <div style={{ height: '2vh' }} />
+                                  </>
+                                )
+                                )
+                                }
+                              </div>
+                              {
+                                task.duedate ?
+                                  <>
+                                    <div className={styles.lastline}>
+                                      <div className={styles.display} style={{background:'#63C05B' , fontSize:'0.463rem'}}>{task.duedate}</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '3.5vw' }} /*onClick={()=>inprogresstoBacklog(index)}*/>BACKLOG</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} /*onClick={()=>inprogresstoTodo(index)}*/>TO-DO</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }}>PROGRESS</div>
+                                    </div>
+                                  </>
+                                  :
+                                  <>
+                                    <div className={styles.lastline}>
+                                      <div className={styles.backlog} style={{ marginLeft: '7.5vw' }} /*onClick={()=>inprogresstoBacklog(index)}*/>BACKLOG</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} /*onClick={()=>inprogresstoTodo(index)}*/>TO-DO</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }}>PROGRESS</div>
+                                    </div>
+                                  </>
+                              }
+                            </div>
+                            <div style={{ height: '2.5vh' }}></div>
+                          </>
+                        ))
+                      }
+                    </>
+                    :
+                    ""
+                }
+
+              </div>
             </div>
 
           </div>
