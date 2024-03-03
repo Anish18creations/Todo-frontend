@@ -42,8 +42,6 @@ export default function Home() {
   let [backlogtasks, setbacklogtasks] = useState([]);
   let [donetasks , setdonetasks] = useState([]);
   let [cardmove , setcardmove] = useState(false);
-  let [demo , setdemo] = useState([]);
-
   const addcard = () => {
     setbuttonpopup(true);
   }

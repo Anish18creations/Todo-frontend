@@ -39,10 +39,8 @@ export const checkallcheckboxes = async (todoid) => {
 
 export const cardinfo = async () => {
     try {
-        //onst t = todoid;
         const requestUrl = `${backendUrl}/todo/alltasks`;
         const response = await axios.get(requestUrl);
-        //console.log(response.data.data);
         return response?.data?.data;
     } catch (error) {
         return;
