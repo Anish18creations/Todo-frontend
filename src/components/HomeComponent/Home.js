@@ -9,6 +9,7 @@ import add from '../../assets/images/add.png';
 import logout from '../../assets/images/Logout.png';
 import AddCard from '../AddCardComponent/AddCard';
 import Logout from '../LogoutComponent/Logout';
+import Deletecard from '../DeleteComponent/Deletecard';
 import { useNavigate } from 'react-router-dom';
 import { cardinfo } from '../../apis/todo';
 import expandforone from '../../assets/images/expandone.png';
@@ -37,6 +38,7 @@ export default function Home() {
 
   let [buttonpopup, setbuttonpopup] = useState(false);
   let [buttonlogout, setbuttonlogout] = useState(false);
+  let [carddelete , setcarddelete] = useState(false);
   let [todotasks, settodotasks] = useState([]);
   let [inprogresstasks, setinprogresstasks] = useState([]);
   let [backlogtasks, setbacklogtasks] = useState([]);
@@ -48,6 +50,10 @@ export default function Home() {
 
   const logoutbox = () => {
     setbuttonlogout(true);
+  }
+
+  const carddel = () => {
+    setcarddelete(true);
   }
 
   useEffect(() => {
@@ -184,7 +190,7 @@ export default function Home() {
         <div className={styles.menu}>
           <div style={{ display: 'flex', marginTop: '3vh', marginLeft: '3vw' }}>
             <img src={promanage} alt='' />
-            <div className={styles.promanage} onClick={()=>{console.log(todotasks)}}>Pro Manage</div>
+            <div className={styles.promanage} onClick={carddel}>Pro Manage</div>
           </div>
 
           <div className={styles.board} style={{ background: '#EDF5FE' }}>
@@ -620,6 +626,7 @@ export default function Home() {
       </div>
       <AddCard trigger={buttonpopup} settrigger={setbuttonpopup} />
       <Logout trigger={buttonlogout} settrigger={setbuttonlogout} />
+      <Deletecard trigger={carddelete} settrigger={setcarddelete} />
     </>
   )
 }

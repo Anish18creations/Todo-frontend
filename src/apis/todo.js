@@ -1,5 +1,5 @@
 import axios from "axios";
-const backendUrl = process.env.REACT_APP_BACKEND_URI;
+const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
 export const AnalyticsofCards = async() => {
     try {
@@ -17,6 +17,7 @@ export const gettodocardinfo = async (todoid) => {
     try {
         const t = todoid;
         const requestUrl = `${backendUrl}/todo/todo-description/${t}`;
+        console.log(requestUrl);
         const response = await axios.get(requestUrl);
         console.log(response);
         return response?.data?.data;
@@ -42,6 +43,18 @@ export const cardinfo = async () => {
         const requestUrl = `${backendUrl}/todo/alltasks`;
         const response = await axios.get(requestUrl);
         return response?.data?.data;
+    } catch (error) {
+        return;
+    }
+}
+
+export const carddelete = async (todoid) => {
+    try{
+        const requestUrl = `${backendUrl}/todo/todo-delete/${todoid}`;
+        console.log(requestUrl);
+        const response = await axios.get(requestUrl);
+        console.log(response?.data);
+        return response?.data;
     } catch (error) {
         return;
     }

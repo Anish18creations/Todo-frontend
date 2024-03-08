@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+body{
+    cursor: default;
+}
+
+.popupcontainer{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #303D438C;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.popup{
+    position: absolute;
+    left: 40vw;
+    top: 40vh;
+    width: 20vw;
+    height: 20vh;
+    background: #FFFFFF;
+    border-radius: 0.5rem;
+}
+
+.asklogout{
+    width: fit-content;
+    height: fit-content;
+    font-family: "Noto Sans", sans-serif;
+    font-weight: 700;
+    font-size: 0.8rem;
+    color: black;
+    margin-left: 2.2vw;
+    margin-top: 2vh;
+}
+
+.yeslogout{
+    margin-left: 1vw;
+    margin-top: 2vh;
+    width: 18vw;
+    height: 4vh;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: white;
+    background: #17A2B8;
+    box-shadow: 0rem 0.12rem 0.7rem 0rem #82698C33;
+    border-radius: 0.6rem;
+    text-align: center;
+    padding-top: 1vh;
+}
+
+.cancel{
+    margin-left: 1vw;
+    margin-top: 1vh;
+    width: 18vw;
+    height: 4vh;
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    color: #CF3636;
+    background: white;
+    box-shadow: 0rem 0.12rem 0.7rem 0rem #82698C33;
+    border-radius: 0.6rem;
+    border-width: 0.06rem;
+    border-color: #CF3636;
+    border-style: solid;
+    text-align: center;
+    padding-top: 1vh;
+}
