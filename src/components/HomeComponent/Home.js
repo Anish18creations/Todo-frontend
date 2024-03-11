@@ -44,6 +44,7 @@ export default function Home() {
   let [backlogtasks, setbacklogtasks] = useState([]);
   let [donetasks , setdonetasks] = useState([]);
   let [cardmove , setcardmove] = useState(false);
+
   const addcard = () => {
     setbuttonpopup(true);
   }
@@ -52,7 +53,9 @@ export default function Home() {
     setbuttonlogout(true);
   }
 
-  const carddel = () => {
+  const carddel = (id) => {
+    document.getElementById(id).style.visibility = 'hidden';
+    localStorage.setItem('delid',id);
     setcarddelete(true);
   }
 
@@ -184,13 +187,22 @@ export default function Home() {
     setcardmove((prev) => !prev); 
   }
 
+  const openorclosepopup = (id) => {
+    console.log(id);
+    console.log(document.getElementById(id).style.visibility);
+    if(document.getElementById(id).style.visibility === 'hidden')
+    document.getElementById(id).style.visibility = 'visible';
+    else
+    document.getElementById(id).style.visibility = 'hidden';
+  }
+
   return (
     <>
       <div style={{ display: 'flex' }}>
         <div className={styles.menu}>
           <div style={{ display: 'flex', marginTop: '3vh', marginLeft: '3vw' }}>
             <img src={promanage} alt='' />
-            <div className={styles.promanage} onClick={carddel}>Pro Manage</div>
+            <div className={styles.promanage}>Pro Manage</div>
           </div>
 
           <div className={styles.board} style={{ background: '#EDF5FE' }}>
@@ -261,23 +273,30 @@ export default function Home() {
                                 <div style={{
                                   width: '0.125rem', height: '0.125rem', borderRadius: '50%', borderStyle: 'solid',
                                   borderWidth: '0.08rem', background: 'black', marginLeft: '7vw', marginTop: '2.5vh'
-                                }}></div>
+                                }} onClick={()=>openorclosepopup(task._id)}></div>
                                 <div style={{
                                   width: '0.125rem', height: '0.125rem', borderRadius: '50%', borderStyle: 'solid',
                                   borderWidth: '0.08rem', background: 'black', marginLeft: '0.2vw', marginTop: '2.5vh'
-                                }}></div>
+                                }} onClick={()=>openorclosepopup(task._id)}></div>
                                 <div style={{
                                   width: '0.125rem', height: '0.125rem', borderRadius: '50%', borderStyle: 'solid',
                                   borderWidth: '0.08rem', background: 'black', marginLeft: '0.2vw', marginTop: '2.5vh'
-                                }}></div>
+                                }} onClick={()=>openorclosepopup(task._id)}></div>
                               </div>
+                              <div style={{display:'flex'}}>
                               <div className={styles.title}>{task.title}</div>
+                              <div className={styles.test} id={task._id} style={{visibility:'hidden'}}>
+                                <div className={styles.option}>Edit</div>
+                                <div className={styles.option} style={{marginTop:'1vh'}}>Share</div>
+                                <div className={styles.option} style={{marginTop:'1vh'}} onClick={()=>carddel(task._id)}>Delete</div>
+                              </div>
+                              </div>
                               <div style={{ display: 'flex' }}>
                                 <div className={styles.checklist}>Checklist (
                                   {task.checklists.filter((item) => item.done === true).length}
                                   /{task.checklists.length})
                                 </div>
-                                <img src={expandforone} style={{ marginLeft: '7vw' }} alt='' />
+                                <img src={expandforone} style={{ marginLeft: '7vw' , marginTop:'-7vh' , width:'1.5rem' , height:'1.5rem'}} alt='' />
                               </div>
                               <div className={styles.checklistdisplay}>
 
@@ -359,23 +378,30 @@ export default function Home() {
                                 <div style={{
                                   width: '0.125rem', height: '0.125rem', borderRadius: '50%', borderStyle: 'solid',
                                   borderWidth: '0.08rem', background: 'black', marginLeft: '7vw', marginTop: '2.5vh'
-                                }}></div>
+                                }} onClick={()=>openorclosepopup(task._id)}></div>
                                 <div style={{
                                   width: '0.125rem', height: '0.125rem', borderRadius: '50%', borderStyle: 'solid',
                                   borderWidth: '0.08rem', background: 'black', marginLeft: '0.2vw', marginTop: '2.5vh'
-                                }}></div>
+                                }} onClick={()=>openorclosepopup(task._id)}></div>
                                 <div style={{
                                   width: '0.125rem', height: '0.125rem', borderRadius: '50%', borderStyle: 'solid',
                                   borderWidth: '0.08rem', background: 'black', marginLeft: '0.2vw', marginTop: '2.5vh'
-                                }}></div>
+                                }} onClick={()=>openorclosepopup(task._id)}></div>
                               </div>
+                              <div style={{ display: 'flex' }}>
                               <div className={styles.title}>{task.title}</div>
+                              <div className={styles.test} id={task._id} style={{visibility:'hidden' , left:'9vw'}}>
+                                <div className={styles.option}>Edit</div>
+                                <div className={styles.option} style={{marginTop:'1vh'}}>Share</div>
+                                <div className={styles.option} style={{marginTop:'1vh'}} onClick={()=>carddel(task._id)}>Delete</div>
+                              </div>
+                              </div>
                               <div style={{ display: 'flex' }}>
                                 <div className={styles.checklist}>Checklist (
                                   {task.checklists.filter((item) => item.done === true).length}
                                   /{task.checklists.length})
                                 </div>
-                                <img src={expandforone} style={{ marginLeft: '7vw' }} alt='' />
+                                <img src={expandforone} style={{ marginLeft: '7vw', marginTop:'-7vh' , width:'1.5rem' , height:'1.5rem' }} alt='' />
                               </div>
                               <div className={styles.checklistdisplay}>
 
@@ -457,23 +483,30 @@ export default function Home() {
                                 <div style={{
                                   width: '0.125rem', height: '0.125rem', borderRadius: '50%', borderStyle: 'solid',
                                   borderWidth: '0.08rem', background: 'black', marginLeft: '7vw', marginTop: '2.5vh'
-                                }}></div>
+                                }} onClick={()=>openorclosepopup(task._id)}></div>
                                 <div style={{
                                   width: '0.125rem', height: '0.125rem', borderRadius: '50%', borderStyle: 'solid',
                                   borderWidth: '0.08rem', background: 'black', marginLeft: '0.2vw', marginTop: '2.5vh'
-                                }}></div>
+                                }} onClick={()=>openorclosepopup(task._id)}></div>
                                 <div style={{
                                   width: '0.125rem', height: '0.125rem', borderRadius: '50%', borderStyle: 'solid',
                                   borderWidth: '0.08rem', background: 'black', marginLeft: '0.2vw', marginTop: '2.5vh'
-                                }}></div>
+                                }} onClick={()=>openorclosepopup(task._id)}></div>
                               </div>
+                              <div style={{ display: 'flex' }}>
                               <div className={styles.title}>{task.title}</div>
+                              <div className={styles.test} id={task._id} style={{visibility:'hidden',left:'9vw'}}>
+                                <div className={styles.option}>Edit</div>
+                                <div className={styles.option} style={{marginTop:'1vh'}}>Share</div>
+                                <div className={styles.option} style={{marginTop:'1vh'}} onClick={()=>carddel(task._id)}>Delete</div>
+                              </div>
+                              </div>
                               <div style={{ display: 'flex' }}>
                                 <div className={styles.checklist}>Checklist (
                                   {task.checklists.filter((item) => item.done === true).length}
                                   /{task.checklists.length})
                                 </div>
-                                <img src={expandforone} style={{ marginLeft: '7vw' }} alt='' />
+                                <img src={expandforone} style={{ marginLeft: '7vw', marginTop:'-7vh' , width:'1.5rem' , height:'1.5rem' }} alt='' />
                               </div>
                               <div className={styles.checklistdisplay}>
 
@@ -555,23 +588,30 @@ export default function Home() {
                                 <div style={{
                                   width: '0.125rem', height: '0.125rem', borderRadius: '50%', borderStyle: 'solid',
                                   borderWidth: '0.08rem', background: 'black', marginLeft: '7vw', marginTop: '2.5vh'
-                                }}></div>
+                                }} onClick={()=>openorclosepopup(task._id)}></div>
                                 <div style={{
                                   width: '0.125rem', height: '0.125rem', borderRadius: '50%', borderStyle: 'solid',
                                   borderWidth: '0.08rem', background: 'black', marginLeft: '0.2vw', marginTop: '2.5vh'
-                                }}></div>
+                                }} onClick={()=>openorclosepopup(task._id)}></div>
                                 <div style={{
                                   width: '0.125rem', height: '0.125rem', borderRadius: '50%', borderStyle: 'solid',
                                   borderWidth: '0.08rem', background: 'black', marginLeft: '0.2vw', marginTop: '2.5vh'
-                                }}></div>
+                                }} onClick={()=>openorclosepopup(task._id)}></div>
                               </div>
+                              <div style={{ display: 'flex' }}>
                               <div className={styles.title}>{task.title}</div>
+                              <div className={styles.test} id={task._id} style={{visibility:'hidden',left:'9vw'}}>
+                                <div className={styles.option}>Edit</div>
+                                <div className={styles.option} style={{marginTop:'1vh'}}>Share</div>
+                                <div className={styles.option} style={{marginTop:'1vh'}} onClick={()=>carddel(task._id)}>Delete</div>
+                              </div>
+                              </div>
                               <div style={{ display: 'flex' }}>
                                 <div className={styles.checklist}>Checklist (
                                   {task.checklists.filter((item) => item.done === true).length}
                                   /{task.checklists.length})
                                 </div>
-                                <img src={expandforone} style={{ marginLeft: '7vw' }} alt='' />
+                                <img src={expandforone} style={{ marginLeft: '7vw' , marginTop:'-7vh' , width:'1.5rem' , height:'1.5rem'}} alt='' />
                               </div>
                               <div className={styles.checklistdisplay}>
 
@@ -592,16 +632,16 @@ export default function Home() {
                                   <>
                                     <div className={styles.lastline}>
                                       <div className={styles.display} style={{background:'#63C05B' , fontSize:'0.463rem'}}>{task.duedate}</div>
-                                      <div className={styles.backlog} style={{ marginLeft: '3.5vw' }} /*onClick={()=>inprogresstoBacklog(index)}*/>BACKLOG</div>
-                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} /*onClick={()=>inprogresstoTodo(index)}*/>TO-DO</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '3.5vw' }}>BACKLOG</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }}>TO-DO</div>
                                       <div className={styles.backlog} style={{ marginLeft: '0.5vw' }}>PROGRESS</div>
                                     </div>
                                   </>
                                   :
                                   <>
                                     <div className={styles.lastline}>
-                                      <div className={styles.backlog} style={{ marginLeft: '7.5vw' }} /*onClick={()=>inprogresstoBacklog(index)}*/>BACKLOG</div>
-                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} /*onClick={()=>inprogresstoTodo(index)}*/>TO-DO</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '7.5vw' }}>BACKLOG</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }}>TO-DO</div>
                                       <div className={styles.backlog} style={{ marginLeft: '0.5vw' }}>PROGRESS</div>
                                     </div>
                                   </>
@@ -626,7 +666,7 @@ export default function Home() {
       </div>
       <AddCard trigger={buttonpopup} settrigger={setbuttonpopup} />
       <Logout trigger={buttonlogout} settrigger={setbuttonlogout} />
-      <Deletecard trigger={carddelete} settrigger={setcarddelete} />
+      <Deletecard trigger={carddelete} settrigger={setcarddelete} changecard={cardmove} setchangecard={setcardmove} />
     </>
   )
 }
