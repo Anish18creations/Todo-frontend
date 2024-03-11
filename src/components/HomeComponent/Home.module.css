@@ -1,17 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-body{
+body {
     cursor: default;
 }
 
-.menu{
+.menu {
     position: absolute;
     width: 15vw;
     height: 100vh;
     border: 0rem 0.06rem 0rem 0rem;
 }
 
-.main{
+.main {
     position: absolute;
     width: 100vw;
     height: 100vh;
@@ -19,7 +19,7 @@ body{
     font-family: "Poppins", sans-serif;
 }
 
-.promanage{
+.promanage {
     font-family: "Poppins", sans-serif;
     font-weight: 700;
     font-size: 0.8rem;
@@ -28,18 +28,18 @@ body{
     margin-top: 0.5vh;
 }
 
-.board{
+.board {
     display: flex;
     width: 15vw;
     height: fit-content;
     margin-top: 3vh;
 }
 
-.board:hover{
-    background:#EDF5FE;
+.board:hover {
+    background: #EDF5FE;
 }
 
-.welcome{
+.welcome {
     margin-left: 2vw;
     margin-top: 3vh;
     width: fit-content;
@@ -49,7 +49,7 @@ body{
     color: black;
 }
 
-.todaysdate{
+.todaysdate {
     margin-left: 60vw;
     margin-top: 5vh;
     width: fit-content;
@@ -59,7 +59,7 @@ body{
     color: #707070;
 }
 
-.boardtxt{
+.boardtxt {
     width: fit-content;
     height: fit-content;
     font-weight: 500;
@@ -69,7 +69,7 @@ body{
     margin-top: 3vh;
 }
 
-.cards{
+.cards {
     width: 25vw;
     height: 90vh;
     font-weight: 500;
@@ -80,7 +80,7 @@ body{
     background: #EEF2F5;
 }
 
-.back{
+.back {
     width: fit-content;
     height: fit-content;
     font-weight: 500;
@@ -90,14 +90,14 @@ body{
     margin-top: 3vh;
 }
 
-.expand{
+.expand {
     width: 1vw;
     height: 2vh;
     margin-left: 14.5vw;
     margin-top: 3.5vh;
 }
 
-.logout{
+.logout {
     width: fit-content;
     height: fit-content;
     font-family: "Poppins", sans-serif;
@@ -107,7 +107,7 @@ body{
     margin-left: 0.7vw;
 }
 
-.displaytodotasks{
+.displaytodotasks {
     width: fit-content;
     max-height: 78vh;
     overflow-x: hidden;
@@ -117,7 +117,7 @@ body{
     scrollbar-width: thin;
 }
 
-.container{
+.container {
     width: 20vw;
     max-height: 40vh;
     border-radius: 1.25rem;
@@ -135,7 +135,7 @@ body{
     margin-top: 2vh;
 }
 
-.title{
+.title {
     width: fit-content;
     height: fit-content;
     font-family: 'Poppins', sans-serif;
@@ -146,12 +146,12 @@ body{
     margin-top: 1.7vh;
 }
 
-.test{
+.test {
     width: 10vw;
     height: 15vh;
     background: white;
     color: black;
-    position :sticky;
+    position: sticky;
     left: 9vw;
     border-radius: 0.6rem;
     box-shadow: 0rem 0.125rem 1.3rem 0rem #7E7A7A40;
@@ -160,12 +160,12 @@ body{
     font-weight: 600;
 }
 
-.option{
+.option {
     margin-top: 2vh;
     margin-left: 1vw;
 }
 
-.option:hover{
+.option:hover {
     color: #CF3636;
 }
 
@@ -239,7 +239,7 @@ input[type='checkbox'] {
     margin-top: -0.6vh;
 }
 
-.backlog{
+.backlog {
     width: fit-content;
     height: fit-content;
     padding: 0.4rem 0.5rem 0.3rem 0.5rem;

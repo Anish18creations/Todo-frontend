@@ -1,7 +1,7 @@
 import axios from "axios";
 const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
-export const AnalyticsofCards = async() => {
+export const AnalyticsofCards = async () => {
     try {
         const requestUrl = `${backendUrl}/todo/analytics`;
         const token = localStorage.getItem("token");
@@ -49,7 +49,7 @@ export const cardinfo = async () => {
 }
 
 export const carddelete = async (todoid) => {
-    try{
+    try {
         const requestUrl = `${backendUrl}/todo/todo-delete/${todoid}`;
         console.log(requestUrl);
         const response = await axios.get(requestUrl);
@@ -60,27 +60,27 @@ export const carddelete = async (todoid) => {
     }
 }
 
-export const addTodoTask = async ({ taskTitle, taskPriority, subTasks , dueDate }) => {
-    
-  
+export const addTodoTask = async ({ taskTitle, taskPriority, subTasks, dueDate }) => {
+
+
     try {
 
         const token = localStorage.getItem("token");
         axios.defaults.headers.common["Authorization"] = token;
-      /*const response = await axios.post(${BACKEND_URL}/addTodo, todoData, {
-        headers,
-      });
+        /*const response = await axios.post(${BACKEND_URL}/addTodo, todoData, {
+          headers,
+        });
+  
+        return response.data;*/
 
-      return response.data;*/
+        const requestUrl = `${backendUrl}/todo/createcard`;
 
-      const requestUrl = `${backendUrl}/todo/createcard`;
-      
-        const requestPayload = {taskTitle, taskPriority, subTasks , dueDate };
+        const requestPayload = { taskTitle, taskPriority, subTasks, dueDate };
         const response = await axios.post(requestUrl, requestPayload);
         console.log(response);
         //return response.data;
     } catch (error) {
-      //throw new Error(error.response.data.message);
-      console.log(error);
+        //throw new Error(error.response.data.message);
+        console.log(error);
     }
-  };
+};

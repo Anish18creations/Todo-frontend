@@ -3,10 +3,12 @@ import styles from './Todocardinfo.module.css';
 import { gettodocardinfo } from '../../apis/todo';
 import toast, { Toaster } from 'react-hot-toast';
 import promanage from '../../assets/images/promanage.png';
+import { useNavigate } from 'react-router-dom';
 
 export default function Todocardinfo() {
 
   const [todofetch, settodofetch] = useState();
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchcarddetails();
@@ -14,7 +16,6 @@ export default function Todocardinfo() {
 
   const fetchcarddetails = async () => {
     const todoid = window.location.pathname?.split("/").slice(-1)[0];
-    console.log(todoid);
     if (!todoid) {
       toast.error('Wrong or invalid link!!', { duration: 1000 });
     }
@@ -22,8 +23,10 @@ export default function Todocardinfo() {
     const response = await gettodocardinfo(todoid);
     if (!response) {
       toast.error('Oops , this card does not exist!!', { duration: 2000 });
+      setTimeout(() => {
+        navigate("/");
+      }, 2000);
     }
-    console.log(response);
     settodofetch(response);
   }
 
