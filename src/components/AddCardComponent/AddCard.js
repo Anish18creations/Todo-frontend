@@ -65,6 +65,7 @@ export default function AddCard(props) {
 
         let formatteddate = month + "/" + day + "/" + year; 
         setDate(formatteddate);
+        console.log(typeof date);
   };
 
   return (props.trigger) ?

@@ -27,6 +27,7 @@ export default function Home() {
   const day = today.getDate();
   const shortmonth = today.toLocaleString('en-US', { month: 'short' }) + ", ";
   const year = today.getFullYear();
+  const monthno = today.getMonth() + 1;
   let v;
   if (day == 1 || day == 21 || day == 31)
     v = "st ";
@@ -38,6 +39,9 @@ export default function Home() {
     v = "th ";
 
   const formattedDate = `${day}${v}${shortmonth}${year}`;
+  const compareDate = `${monthno}/${day}/${year}`;
+  //console.log(typeof formattedDate);
+  //console.log(compareDate , typeof compareDate);
 
   let [buttonpopup, setbuttonpopup] = useState(false);
   let [buttonlogout, setbuttonlogout] = useState(false);
@@ -387,7 +391,7 @@ export default function Home() {
                                         ?
                                         '#63C05B'
                                         :
-                                        '#18B0FF'
+                                        '#18B0FF' 
                                 }}
                                 />
                                 <div className={styles.priority}>{task.priority}</div>
@@ -424,7 +428,7 @@ export default function Home() {
                                 {task.checklists.map((item, i) => (
                                   <>
                                     <div className={styles.box}>
-                                      <input type='checkbox' style={{ marginTop: '1.15vh' }} checked={item.done} id={i} onClick={
+                                      <input type='checkbox' style={{ marginTop: '1.15vh' }} checked={item.done} id={i} onChange={
                                         () => checkuncheck(task._id, i, item._id, index, 'backlog')} />
                                       <div className={styles.taskname}>{item.taskname}</div>
                                     </div>
@@ -438,7 +442,19 @@ export default function Home() {
                                 task.duedate ?
                                   <>
                                     <div className={styles.lastline}>
-                                      <div className={styles.display}>{task.duedate}</div>
+                                      <div className={styles.display} style={{ color : 
+                                      (moment(task.duedateunformatted, "MM/DD/YYYY").diff(moment(compareDate, "MM/DD/YYYY"), "days"))>0
+                                      ? '#5A5A5A' : '#FFFFFF', 
+                                      fontWeight : 
+                                      (moment(task.duedateunformatted, "MM/DD/YYYY").diff(moment(compareDate, "MM/DD/YYYY"), "days"))>0
+                                      ? '800' : '500' ,
+                                        background:
+                                          (moment(task.duedateunformatted, "MM/DD/YYYY").diff(moment(compareDate, "MM/DD/YYYY"), "days"))>0
+                                         ? '#DBDBDB' : '#CF3636' 
+                                        
+                                      }}>
+                                        {task.duedate}
+                                      </div>
                                       <div className={styles.backlog} style={{ marginLeft: '3.5vw' }} onClick={() => backlogtoTodo(index)}>TO-DO</div>
                                       <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={() => backlogtoInprogress(index)}>PROGRESS</div>
                                       <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={() => backlogtoDone(index, task._id)}>DONE</div>
@@ -531,7 +547,7 @@ export default function Home() {
                                   <>
                                     <div className={styles.box}>
                                       <input type='checkbox' style={{ marginTop: '1.15vh' }} checked={item.done}
-                                        id={i} onClick={() => checkuncheck(task._id, i, item._id, index, 'todo')} />
+                                        id={i} onChange={() => checkuncheck(task._id, i, item._id, index, 'todo')} />
                                       <div className={styles.taskname}>{item.taskname}</div>
                                     </div>
                                     <div style={{ height: '2vh' }} />
@@ -544,8 +560,19 @@ export default function Home() {
                                 task.duedate ?
                                   <>
                                     <div className={styles.lastline}>
-                                      <div className={styles.display}>{task.duedate}</div>
-                                      <div className={styles.backlog} style={{ marginLeft: '3.5vw' }} onClick={() => todotoBacklog(index)}>BACKLOG</div>
+                                      <div className={styles.display} style={{ color : 
+                                      (moment(task.duedateunformatted, "MM/DD/YYYY").diff(moment(compareDate, "MM/DD/YYYY"), "days"))>0
+                                      ? '#5A5A5A' : '#FFFFFF', 
+                                      fontWeight : 
+                                      (moment(task.duedateunformatted, "MM/DD/YYYY").diff(moment(compareDate, "MM/DD/YYYY"), "days"))>0
+                                      ? '800' : '500' ,
+                                        background:
+                                          (moment(task.duedateunformatted, "MM/DD/YYYY").diff(moment(compareDate, "MM/DD/YYYY"), "days"))>0
+                                         ? '#DBDBDB' : '#CF3636' 
+                                      }}>
+                                        {task.duedate}
+                                      </div>
+                                      <div className={styles.backlog} style={{ marginLeft: '2vw' }} onClick={() => todotoBacklog(index)}>BACKLOG</div>
                                       <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={() => todotoProgress(index)}>PROGRESS</div>
                                       <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={() => todotoDone(index, task._id)}>DONE</div>
                                     </div>
@@ -553,7 +580,7 @@ export default function Home() {
                                   :
                                   <>
                                     <div className={styles.lastline}>
-                                      <div className={styles.backlog} style={{ marginLeft: '7.5vw' }} onClick={() => todotoBacklog(index)}>BACKLOG</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '6.5vw' }} onClick={() => todotoBacklog(index)}>BACKLOG</div>
                                       <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={() => todotoProgress(index)}>PROGRESS</div>
                                       <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={() => todotoDone(index, task._id)}>DONE</div>
                                     </div>
@@ -637,7 +664,7 @@ export default function Home() {
                                   <>
                                     <div className={styles.box}>
                                       <input type='checkbox' style={{ marginTop: '1.15vh' }} checked={item.done}
-                                        id={i} onClick={() => checkuncheck(task._id, i, item._id, index, 'inprogress')} />
+                                        id={i} onChange={() => checkuncheck(task._id, i, item._id, index, 'inprogress')} />
                                       <div className={styles.taskname}>{item.taskname}</div>
                                     </div>
                                     <div style={{ height: '2vh' }} />
@@ -650,7 +677,18 @@ export default function Home() {
                                 task.duedate ?
                                   <>
                                     <div className={styles.lastline}>
-                                      <div className={styles.display}>{task.duedate}</div>
+                                      <div className={styles.display} style={{ color : 
+                                      (moment(task.duedateunformatted, "MM/DD/YYYY").diff(moment(compareDate, "MM/DD/YYYY"), "days"))>0
+                                      ? '#5A5A5A' : '#FFFFFF', 
+                                      fontWeight : 
+                                      (moment(task.duedateunformatted, "MM/DD/YYYY").diff(moment(compareDate, "MM/DD/YYYY"), "days"))>0
+                                      ? '800' : '500' ,
+                                        background:
+                                          (moment(task.duedateunformatted, "MM/DD/YYYY").diff(moment(compareDate, "MM/DD/YYYY"), "days"))>0
+                                         ? '#DBDBDB' : '#CF3636' 
+                                      }}>
+                                        {task.duedate}
+                                      </div>
                                       <div className={styles.backlog} style={{ marginLeft: '3.5vw' }} onClick={() => inprogresstoBacklog(index)}>BACKLOG</div>
                                       <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={() => inprogresstoTodo(index)}>TO-DO</div>
                                       <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={() => inprogresstoDone(index, task._id)}>DONE</div>
@@ -743,7 +781,7 @@ export default function Home() {
                                   <>
                                     <div className={styles.box}>
                                       <input type='checkbox' style={{ marginTop: '1.15vh' }} checked={item.done}
-                                        id={i} onClick={() => checkuncheck(task._id, i, item._id, index, 'done')} /><Toaster />
+                                        id={i} onChange={() => checkuncheck(task._id, i, item._id, index, 'done')} /><Toaster />
                                       <div className={styles.taskname}>{item.taskname}</div>
                                     </div>
                                     <div style={{ height: '2vh' }} />
@@ -756,8 +794,8 @@ export default function Home() {
                                 task.duedate ?
                                   <>
                                     <div className={styles.lastline}>
-                                      <div className={styles.display} style={{ background: '#63C05B', fontSize: '0.463rem' }}>{task.duedate}</div>
-                                      <div className={styles.backlog} style={{ marginLeft: '3.5vw' }} onClick={() => donetoBacklog(index)}>BACKLOG</div>
+                                      <div className={styles.display} style={{ background: '#63C05B', fontSize: '0.465rem', padding: '0.31rem' }}>{task.duedate}</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '2.3vw' }} onClick={() => donetoBacklog(index)}>BACKLOG</div>
                                       <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={() => donetoTodo(index)}>TO-DO</div>
                                       <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={() => donetoInprogress(index)}>PROGRESS</div>
                                     </div>
@@ -765,7 +803,7 @@ export default function Home() {
                                   :
                                   <>
                                     <div className={styles.lastline}>
-                                      <div className={styles.backlog} style={{ marginLeft: '7.5vw' }} onClick={() => donetoBacklog(index)}>BACKLOG</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '6.2vw' }} onClick={() => donetoBacklog(index)}>BACKLOG</div>
                                       <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={() => donetoTodo(index)}>TO-DO</div>
                                       <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={() => donetoInprogress(index)}>PROGRESS</div>
                                     </div>
