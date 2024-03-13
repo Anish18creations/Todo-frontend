@@ -17,9 +17,7 @@ export const gettodocardinfo = async (todoid) => {
     try {
         const t = todoid;
         const requestUrl = `${backendUrl}/todo/todo-description/${t}`;
-        console.log(requestUrl);
         const response = await axios.get(requestUrl);
-        console.log(response);
         return response?.data?.data;
     } catch (error) {
         return;
@@ -31,9 +29,20 @@ export const checkallcheckboxes = async (todoid) => {
         const t = todoid;
         const requestUrl = `${backendUrl}/todo/movetodonesection/${t}`;
         const response = await axios.get(requestUrl);
-        console.log(response.data.data);
         return response?.data?.data;
     } catch (error) {
+        return;
+    }
+}
+
+export const checkoruncheckcheckbox = async (todoid, subtaskid, value) => {
+    try {
+        const requestUrl = `${backendUrl}/todo/checkuncheck`;
+        const requestPayload = { todoid, subtaskid, value };
+        const response = await axios.put(requestUrl, requestPayload);
+        return response?.data;
+    }
+    catch (error) {
         return;
     }
 }
@@ -51,9 +60,7 @@ export const cardinfo = async () => {
 export const carddelete = async (todoid) => {
     try {
         const requestUrl = `${backendUrl}/todo/todo-delete/${todoid}`;
-        console.log(requestUrl);
         const response = await axios.get(requestUrl);
-        console.log(response?.data);
         return response?.data;
     } catch (error) {
         return;
@@ -81,6 +88,6 @@ export const addTodoTask = async ({ taskTitle, taskPriority, subTasks, dueDate }
         //return response.data;
     } catch (error) {
         //throw new Error(error.response.data.message);
-        console.log(error);
+        return;
     }
 };

@@ -51,7 +51,7 @@ export default function AddCard(props) {
     const x = checklist.splice(f,1);
     setchecklist([...checklist]);
     localStorage.removeItem(f);
-    console.log('hello');
+    
     //console.log(checklist);
   }
 

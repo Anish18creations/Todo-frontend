@@ -12,6 +12,7 @@ import Logout from '../LogoutComponent/Logout';
 import Deletecard from '../DeleteComponent/Deletecard';
 import { useNavigate } from 'react-router-dom';
 import { cardinfo } from '../../apis/todo';
+import { checkoruncheckcheckbox } from '../../apis/todo';
 import expandforone from '../../assets/images/expandone.png';
 import moment from "moment";
 import { checkallcheckboxes } from '../../apis/todo';
@@ -190,6 +191,35 @@ export default function Home() {
     setcardmove((prev) => !prev);
   }
 
+  const donetoBacklog = (i) => {
+    const newItems = donetasks.splice(i, 1);
+    backlogtasks.push(newItems[0]);
+    setbacklogtasks(backlogtasks);
+    localStorage.setItem('donetasks', JSON.stringify(donetasks));
+    localStorage.setItem('backlogtasks', JSON.stringify(backlogtasks));
+    setcardmove((prev) => !prev);
+  }
+
+  const donetoTodo = (i) => {
+
+    const newItems = donetasks.splice(i, 1);
+    todotasks.push(newItems[0]);
+    settodotasks(todotasks);
+    localStorage.setItem('donetasks', JSON.stringify(donetasks));
+    localStorage.setItem('todotasks', JSON.stringify(todotasks));
+    setcardmove((prev) => !prev);
+  }
+
+  const donetoInprogress = (i) => {
+
+    const newItems = donetasks.splice(i, 1);
+    inprogresstasks.push(newItems[0]);
+    setinprogresstasks(inprogresstasks);
+    localStorage.setItem('donetasks', JSON.stringify(donetasks));
+    localStorage.setItem('inprogresstasks', JSON.stringify(inprogresstasks));
+    setcardmove((prev) => !prev);
+  }
+
   const openorclosepopup = (id) => {
 
     console.log(id);
@@ -220,6 +250,71 @@ export default function Home() {
     setTimeout(() => {
       document.getElementById(cardid).style.visibility = 'hidden';
     }, 2000);
+  }
+
+  const checkuncheck = async (taskid, i, subtaskid, index, section) => {
+    let c;
+
+    if (section == 'backlog') {
+      backlogtasks.map((item, indexpos) => {
+        if (indexpos == index) {
+          item.checklists.map((a, b) => {
+            if (b == i)
+              c = !a.done;
+          }
+          )
+        }
+      });
+
+      setbacklogtasks(backlogtasks.splice(index, 1));
+      const response = await checkoruncheckcheckbox(taskid, subtaskid, c);
+      localStorage.setItem("backlogtasks", JSON.stringify(backlogtasks));
+      setbacklogtasks(JSON.parse(localStorage.getItem('backlogtasks')));
+      backlogtasks.splice(index, 0, response.data);
+      localStorage.setItem("backlogtasks", JSON.stringify(backlogtasks));
+
+    }
+    else if (section == 'todo') {
+      todotasks.map((item, indexpos) => {
+        if (indexpos == index) {
+          item.checklists.map((a, b) => {
+            if (b == i)
+              c = !a.done;
+          }
+          )
+        }
+      });
+
+      settodotasks(todotasks.splice(index, 1));
+      const response = await checkoruncheckcheckbox(taskid, subtaskid, c);
+      localStorage.setItem("todotasks", JSON.stringify(todotasks));
+      settodotasks(JSON.parse(localStorage.getItem('todotasks')));
+      todotasks.splice(index, 0, response.data);
+      localStorage.setItem("todotasks", JSON.stringify(todotasks));
+    }
+    else if (section == 'inprogress') {
+      inprogresstasks.map((item, indexpos) => {
+        if (indexpos == index) {
+          item.checklists.map((a, b) => {
+            if (b == i)
+              c = !a.done;
+          }
+          )
+        }
+      });
+
+      setinprogresstasks(inprogresstasks.splice(index, 1));
+      const response = await checkoruncheckcheckbox(taskid, subtaskid, c);
+      localStorage.setItem("inprogresstasks", JSON.stringify(inprogresstasks));
+      setinprogresstasks(JSON.parse(localStorage.getItem('inprogresstasks')));
+      inprogresstasks.splice(index, 0, response.data);
+      localStorage.setItem("inprogresstasks", JSON.stringify(inprogresstasks));
+    }
+    else
+      toast.error("You cannot check or uncheck boxes from Done section , Move the card to any of the other three sections to check or uncheck boxes!!", { duration: 4000 });
+
+    setcardmove((prev) => !prev);
+
   }
 
   return (
@@ -326,10 +421,11 @@ export default function Home() {
                               </div>
                               <div className={styles.checklistdisplay}>
 
-                                {task.checklists.map((item) => (
+                                {task.checklists.map((item, i) => (
                                   <>
                                     <div className={styles.box}>
-                                      <input type='checkbox' style={{ marginTop: '1.15vh' }} checked={item.done} />
+                                      <input type='checkbox' style={{ marginTop: '1.15vh' }} checked={item.done} id={i} onClick={
+                                        () => checkuncheck(task._id, i, item._id, index, 'backlog')} />
                                       <div className={styles.taskname}>{item.taskname}</div>
                                     </div>
                                     <div style={{ height: '2vh' }} />
@@ -431,10 +527,11 @@ export default function Home() {
                               </div>
                               <div className={styles.checklistdisplay}>
 
-                                {task.checklists.map((item) => (
+                                {task.checklists.map((item, i) => (
                                   <>
                                     <div className={styles.box}>
-                                      <input type='checkbox' style={{ marginTop: '1.15vh' }} checked={item.done} />
+                                      <input type='checkbox' style={{ marginTop: '1.15vh' }} checked={item.done}
+                                        id={i} onClick={() => checkuncheck(task._id, i, item._id, index, 'todo')} />
                                       <div className={styles.taskname}>{item.taskname}</div>
                                     </div>
                                     <div style={{ height: '2vh' }} />
@@ -536,10 +633,11 @@ export default function Home() {
                               </div>
                               <div className={styles.checklistdisplay}>
 
-                                {task.checklists.map((item) => (
+                                {task.checklists.map((item, i) => (
                                   <>
                                     <div className={styles.box}>
-                                      <input type='checkbox' style={{ marginTop: '1.15vh' }} checked={item.done} />
+                                      <input type='checkbox' style={{ marginTop: '1.15vh' }} checked={item.done}
+                                        id={i} onClick={() => checkuncheck(task._id, i, item._id, index, 'inprogress')} />
                                       <div className={styles.taskname}>{item.taskname}</div>
                                     </div>
                                     <div style={{ height: '2vh' }} />
@@ -641,10 +739,11 @@ export default function Home() {
                               </div>
                               <div className={styles.checklistdisplay}>
 
-                                {task.checklists.map((item) => (
+                                {task.checklists.map((item, i) => (
                                   <>
                                     <div className={styles.box}>
-                                      <input type='checkbox' style={{ marginTop: '1.15vh' }} checked={item.done} />
+                                      <input type='checkbox' style={{ marginTop: '1.15vh' }} checked={item.done}
+                                        id={i} onClick={() => checkuncheck(task._id, i, item._id, index, 'done')} /><Toaster />
                                       <div className={styles.taskname}>{item.taskname}</div>
                                     </div>
                                     <div style={{ height: '2vh' }} />
@@ -658,17 +757,17 @@ export default function Home() {
                                   <>
                                     <div className={styles.lastline}>
                                       <div className={styles.display} style={{ background: '#63C05B', fontSize: '0.463rem' }}>{task.duedate}</div>
-                                      <div className={styles.backlog} style={{ marginLeft: '3.5vw' }}>BACKLOG</div>
-                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }}>TO-DO</div>
-                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }}>PROGRESS</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '3.5vw' }} onClick={() => donetoBacklog(index)}>BACKLOG</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={() => donetoTodo(index)}>TO-DO</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={() => donetoInprogress(index)}>PROGRESS</div>
                                     </div>
                                   </>
                                   :
                                   <>
                                     <div className={styles.lastline}>
-                                      <div className={styles.backlog} style={{ marginLeft: '7.5vw' }}>BACKLOG</div>
-                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }}>TO-DO</div>
-                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }}>PROGRESS</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '7.5vw' }} onClick={() => donetoBacklog(index)}>BACKLOG</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={() => donetoTodo(index)}>TO-DO</div>
+                                      <div className={styles.backlog} style={{ marginLeft: '0.5vw' }} onClick={() => donetoInprogress(index)}>PROGRESS</div>
                                     </div>
                                   </>
                               }
