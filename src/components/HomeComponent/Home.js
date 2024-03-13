@@ -40,8 +40,7 @@ export default function Home() {
 
   const formattedDate = `${day}${v}${shortmonth}${year}`;
   const compareDate = `${monthno}/${day}/${year}`;
-  //console.log(typeof formattedDate);
-  //console.log(compareDate , typeof compareDate);
+  localStorage.setItem('today', compareDate);
 
   let [buttonpopup, setbuttonpopup] = useState(false);
   let [buttonlogout, setbuttonlogout] = useState(false);
@@ -391,7 +390,7 @@ export default function Home() {
                                         ?
                                         '#63C05B'
                                         :
-                                        '#18B0FF' 
+                                        '#18B0FF'
                                 }}
                                 />
                                 <div className={styles.priority}>{task.priority}</div>
@@ -442,16 +441,17 @@ export default function Home() {
                                 task.duedate ?
                                   <>
                                     <div className={styles.lastline}>
-                                      <div className={styles.display} style={{ color : 
-                                      (moment(task.duedateunformatted, "MM/DD/YYYY").diff(moment(compareDate, "MM/DD/YYYY"), "days"))>0
-                                      ? '#5A5A5A' : '#FFFFFF', 
-                                      fontWeight : 
-                                      (moment(task.duedateunformatted, "MM/DD/YYYY").diff(moment(compareDate, "MM/DD/YYYY"), "days"))>0
-                                      ? '800' : '500' ,
+                                      <div className={styles.display} style={{
+                                        color:
+                                          (moment(task.duedateunformatted, "MM/DD/YYYY").diff(moment(compareDate, "MM/DD/YYYY"), "days")) > 0
+                                            ? '#5A5A5A' : '#FFFFFF',
+                                        fontWeight:
+                                          (moment(task.duedateunformatted, "MM/DD/YYYY").diff(moment(compareDate, "MM/DD/YYYY"), "days")) > 0
+                                            ? '800' : '500',
                                         background:
-                                          (moment(task.duedateunformatted, "MM/DD/YYYY").diff(moment(compareDate, "MM/DD/YYYY"), "days"))>0
-                                         ? '#DBDBDB' : '#CF3636' 
-                                        
+                                          (moment(task.duedateunformatted, "MM/DD/YYYY").diff(moment(compareDate, "MM/DD/YYYY"), "days")) > 0
+                                            ? '#DBDBDB' : '#CF3636'
+
                                       }}>
                                         {task.duedate}
                                       </div>
@@ -560,15 +560,16 @@ export default function Home() {
                                 task.duedate ?
                                   <>
                                     <div className={styles.lastline}>
-                                      <div className={styles.display} style={{ color : 
-                                      (moment(task.duedateunformatted, "MM/DD/YYYY").diff(moment(compareDate, "MM/DD/YYYY"), "days"))>0
-                                      ? '#5A5A5A' : '#FFFFFF', 
-                                      fontWeight : 
-                                      (moment(task.duedateunformatted, "MM/DD/YYYY").diff(moment(compareDate, "MM/DD/YYYY"), "days"))>0
-                                      ? '800' : '500' ,
+                                      <div className={styles.display} style={{
+                                        color:
+                                          (moment(task.duedateunformatted, "MM/DD/YYYY").diff(moment(compareDate, "MM/DD/YYYY"), "days")) > 0
+                                            ? '#5A5A5A' : '#FFFFFF',
+                                        fontWeight:
+                                          (moment(task.duedateunformatted, "MM/DD/YYYY").diff(moment(compareDate, "MM/DD/YYYY"), "days")) > 0
+                                            ? '800' : '500',
                                         background:
-                                          (moment(task.duedateunformatted, "MM/DD/YYYY").diff(moment(compareDate, "MM/DD/YYYY"), "days"))>0
-                                         ? '#DBDBDB' : '#CF3636' 
+                                          (moment(task.duedateunformatted, "MM/DD/YYYY").diff(moment(compareDate, "MM/DD/YYYY"), "days")) > 0
+                                            ? '#DBDBDB' : '#CF3636'
                                       }}>
                                         {task.duedate}
                                       </div>
@@ -677,15 +678,16 @@ export default function Home() {
                                 task.duedate ?
                                   <>
                                     <div className={styles.lastline}>
-                                      <div className={styles.display} style={{ color : 
-                                      (moment(task.duedateunformatted, "MM/DD/YYYY").diff(moment(compareDate, "MM/DD/YYYY"), "days"))>0
-                                      ? '#5A5A5A' : '#FFFFFF', 
-                                      fontWeight : 
-                                      (moment(task.duedateunformatted, "MM/DD/YYYY").diff(moment(compareDate, "MM/DD/YYYY"), "days"))>0
-                                      ? '800' : '500' ,
+                                      <div className={styles.display} style={{
+                                        color:
+                                          (moment(task.duedateunformatted, "MM/DD/YYYY").diff(moment(compareDate, "MM/DD/YYYY"), "days")) > 0
+                                            ? '#5A5A5A' : '#FFFFFF',
+                                        fontWeight:
+                                          (moment(task.duedateunformatted, "MM/DD/YYYY").diff(moment(compareDate, "MM/DD/YYYY"), "days")) > 0
+                                            ? '800' : '500',
                                         background:
-                                          (moment(task.duedateunformatted, "MM/DD/YYYY").diff(moment(compareDate, "MM/DD/YYYY"), "days"))>0
-                                         ? '#DBDBDB' : '#CF3636' 
+                                          (moment(task.duedateunformatted, "MM/DD/YYYY").diff(moment(compareDate, "MM/DD/YYYY"), "days")) > 0
+                                            ? '#DBDBDB' : '#CF3636'
                                       }}>
                                         {task.duedate}
                                       </div>
