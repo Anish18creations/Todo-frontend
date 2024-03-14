@@ -14,6 +14,7 @@ import { useNavigate } from 'react-router-dom';
 import { cardinfo } from '../../apis/todo';
 import { checkoruncheckcheckbox } from '../../apis/todo';
 import expandforone from '../../assets/images/expandone.png';
+import collapseforone from '../../assets/images/collapseone.png';
 import moment from "moment";
 import { checkallcheckboxes } from '../../apis/todo';
 import copy from 'copy-to-clipboard';
@@ -85,19 +86,23 @@ export default function Home() {
     if (!localStorage.getItem('todotasks')) {
       settodotasks(response);
       localStorage.setItem('todotasks', JSON.stringify(response));
-      console.log(JSON.parse(localStorage.getItem('todotasks')));
+      //push all the id values of each card in local storage
     }
     else
       settodotasks(JSON.parse(localStorage.getItem('todotasks')));
+      //push all the id values of each card in local storage
 
     if (localStorage.getItem('inprogresstasks'))
       setinprogresstasks(JSON.parse(localStorage.getItem('inprogresstasks')));
+    //push all the id values of each card in local storage
 
     if (localStorage.getItem('backlogtasks'))
       setbacklogtasks(JSON.parse(localStorage.getItem('backlogtasks')));
+    //push all the id values of each card in local storage
 
     if (localStorage.getItem('donetasks'))
       setdonetasks(JSON.parse(localStorage.getItem('donetasks')));
+    //push all the id values of each card in local storage
 
   }
 
@@ -320,6 +325,25 @@ export default function Home() {
 
   }
 
+  const expandcollapsechecklist = (i,j) => {
+    const d = document.getElementById(i).style.visibility;
+    const e = document.getElementById(j);
+    if(d == 'hidden'){
+      document.getElementById(i).style.visibility = 'visible';
+      document.getElementById(i).style.height = '15vh' ;
+      e.src = require('../../assets/images/collapseone.png');
+    }
+    else{
+      document.getElementById(i).style.visibility = 'hidden';
+      document.getElementById(i).style.height = '0vh' ;
+      e.src = require('../../assets/images/expandone.png');
+    }
+  }
+
+  const collapseAll = () => {
+      
+  }
+
   return (
     <>
       <div style={{ display: 'flex' }}>
@@ -367,7 +391,7 @@ export default function Home() {
 
               <div style={{ display: 'flex' }}>
                 <div className={styles.back}>Backlog</div>
-                <img src={expand} className={styles.expand} alt='' />
+                <img src={expand} className={styles.expand} onClick={()=>collapseAll()} alt='' />
               </div>
 
               <div className={styles.displaytodotasks}>
@@ -420,9 +444,10 @@ export default function Home() {
                                   {task.checklists.filter((item) => item.done === true).length}
                                   /{task.checklists.length})
                                 </div>
-                                <img src={expandforone} style={{ marginLeft: '7vw', marginTop: '-7vh', width: '1.5rem', height: '1.5rem' }} alt='' />
+                                <img src={require('../../assets/images/expandone.png')} id={task._id + "b"} style={{ marginLeft: '7vw', marginTop: '-7vh', width: '1.5rem', height: '1.5rem' }}
+                                onClick={()=>expandcollapsechecklist(task._id + "a",task._id + "b")} alt='' />
                               </div>
-                              <div className={styles.checklistdisplay}>
+                              <div className={styles.checklistdisplay} id={task._id + "a"} style={{visibility:'hidden',height:'0vh'}}>
 
                                 {task.checklists.map((item, i) => (
                                   <>
@@ -539,9 +564,10 @@ export default function Home() {
                                   {task.checklists.filter((item) => item.done === true).length}
                                   /{task.checklists.length})
                                 </div>
-                                <img src={expandforone} style={{ marginLeft: '7vw', marginTop: '-7vh', width: '1.5rem', height: '1.5rem' }} alt='' />
+                                <img src={require('../../assets/images/expandone.png')} id={task._id + "b"} style={{ marginLeft: '7vw', marginTop: '-7vh', width: '1.5rem', height: '1.5rem' }}
+                                onClick={()=>expandcollapsechecklist(task._id + "a",task._id + "b")} alt='' />
                               </div>
-                              <div className={styles.checklistdisplay}>
+                              <div className={styles.checklistdisplay} id={task._id + "a"} style={{visibility:'hidden',height:'0vh'}}>
 
                                 {task.checklists.map((item, i) => (
                                   <>
@@ -657,9 +683,10 @@ export default function Home() {
                                   {task.checklists.filter((item) => item.done === true).length}
                                   /{task.checklists.length})
                                 </div>
-                                <img src={expandforone} style={{ marginLeft: '7vw', marginTop: '-7vh', width: '1.5rem', height: '1.5rem' }} alt='' />
+                                <img src={require('../../assets/images/expandone.png')} id={task._id + "b"} style={{ marginLeft: '7vw', marginTop: '-7vh', width: '1.5rem', height: '1.5rem' }}
+                                onClick={()=>expandcollapsechecklist(task._id + "a",task._id + "b")} alt='' />
                               </div>
-                              <div className={styles.checklistdisplay}>
+                              <div className={styles.checklistdisplay} id={task._id + "a"} style={{visibility:'hidden',height:'0vh'}}>
 
                                 {task.checklists.map((item, i) => (
                                   <>
@@ -775,9 +802,10 @@ export default function Home() {
                                   {task.checklists.filter((item) => item.done === true).length}
                                   /{task.checklists.length})
                                 </div>
-                                <img src={expandforone} style={{ marginLeft: '7vw', marginTop: '-7vh', width: '1.5rem', height: '1.5rem' }} alt='' />
+                                <img src={require('../../assets/images/expandone.png')} id={task._id + "b"} style={{ marginLeft: '7vw', marginTop: '-7vh', width: '1.5rem', height: '1.5rem' }}
+                                onClick={()=>expandcollapsechecklist(task._id + "a",task._id + "b")} alt='' />
                               </div>
-                              <div className={styles.checklistdisplay}>
+                              <div className={styles.checklistdisplay} id={task._id + "a"} style={{visibility:'hidden',height:'0vh'}}>
 
                                 {task.checklists.map((item, i) => (
                                   <>
