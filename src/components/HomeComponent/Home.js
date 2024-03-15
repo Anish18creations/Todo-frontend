@@ -13,8 +13,6 @@ import Deletecard from '../DeleteComponent/Deletecard';
 import { useNavigate } from 'react-router-dom';
 import { cardinfo } from '../../apis/todo';
 import { checkoruncheckcheckbox } from '../../apis/todo';
-import expandforone from '../../assets/images/expandone.png';
-import collapseforone from '../../assets/images/collapseone.png';
 import moment from "moment";
 import { checkallcheckboxes } from '../../apis/todo';
 import copy from 'copy-to-clipboard';
@@ -86,24 +84,54 @@ export default function Home() {
     if (!localStorage.getItem('todotasks')) {
       settodotasks(response);
       localStorage.setItem('todotasks', JSON.stringify(response));
-      //push all the id values of each card in local storage
+      let todolocalstorage = [];
+      response.map((item)=>{
+        todolocalstorage.push(item._id);
+      })
+      localStorage.setItem('todolocalstorage',JSON.stringify(todolocalstorage));
     }
     else
+    {
       settodotasks(JSON.parse(localStorage.getItem('todotasks')));
-      //push all the id values of each card in local storage
+      const todolocal = JSON.parse(localStorage.getItem('todotasks'));
+      let todolocalstorage = [];
+      todolocal.map((item)=>{
+        todolocalstorage.push(item._id);
+      })
+      localStorage.setItem('todolocalstorage',JSON.stringify(todolocalstorage));
+    }  
 
     if (localStorage.getItem('inprogresstasks'))
+    {
       setinprogresstasks(JSON.parse(localStorage.getItem('inprogresstasks')));
-    //push all the id values of each card in local storage
-
-    if (localStorage.getItem('backlogtasks'))
+      const inprogresslocal = JSON.parse(localStorage.getItem('inprogresstasks'));
+      let inprogresslocalstorage = [];
+      inprogresslocal.map((item)=>{
+        inprogresslocalstorage.push(item._id);
+      })
+      localStorage.setItem('inprogresslocalstorage',JSON.stringify(inprogresslocalstorage));
+    }
+      
+    if (localStorage.getItem('backlogtasks')){
       setbacklogtasks(JSON.parse(localStorage.getItem('backlogtasks')));
-    //push all the id values of each card in local storage
-
-    if (localStorage.getItem('donetasks'))
+      const backloglocal = JSON.parse(localStorage.getItem('backlogtasks'));
+      let backloglocalstorage = [];
+      backloglocal.map((item)=>{
+        backloglocalstorage.push(item._id);
+      })
+      localStorage.setItem('backloglocalstorage',JSON.stringify(backloglocalstorage));
+    }
+      
+    if (localStorage.getItem('donetasks')){
       setdonetasks(JSON.parse(localStorage.getItem('donetasks')));
-    //push all the id values of each card in local storage
-
+      const donelocal = JSON.parse(localStorage.getItem('donetasks'));
+      let donelocalstorage = [];
+      donelocal.map((item)=>{
+        donelocalstorage.push(item._id);
+      })
+      localStorage.setItem('donelocalstorage',JSON.stringify(donelocalstorage));
+    }
+      
   }
 
   const todotoProgress = (i) => {
@@ -340,8 +368,40 @@ export default function Home() {
     }
   }
 
-  const collapseAll = () => {
-      
+  const collapseAll = (i) => {
+    if(i == 'todo'){
+      const gettodo = JSON.parse(localStorage.getItem('todolocalstorage'));
+      gettodo.map((item)=>{
+      document.getElementById(item+"a").style.visibility = 'hidden';
+      document.getElementById(item+'a').style.height = '0vh'; 
+      document.getElementById(item+'b').src = require('../../assets/images/expandone.png');
+    })
+    }
+    else if(i == 'backlog'){
+      const getbacklog = JSON.parse(localStorage.getItem('backloglocalstorage'));
+      getbacklog.map((item)=>{
+      document.getElementById(item+"a").style.visibility = 'hidden';
+      document.getElementById(item+'a').style.height = '0vh'; 
+      document.getElementById(item+'b').src = require('../../assets/images/expandone.png');
+    })  
+    } 
+    else if(i == 'inprogress'){
+      const getinprogress = JSON.parse(localStorage.getItem('inprogresslocalstorage'));
+      getinprogress.map((item)=>{
+      document.getElementById(item+"a").style.visibility = 'hidden';
+      document.getElementById(item+'a').style.height = '0vh'; 
+      document.getElementById(item+'b').src = require('../../assets/images/expandone.png');
+    })  
+    } 
+    else{
+      const getdone = JSON.parse(localStorage.getItem('donelocalstorage'));
+      getdone.map((item)=>{
+      document.getElementById(item+"a").style.visibility = 'hidden';
+      document.getElementById(item+'a').style.height = '0vh'; 
+      document.getElementById(item+'b').src = require('../../assets/images/expandone.png');
+    })  
+    }
+
   }
 
   return (
@@ -391,7 +451,7 @@ export default function Home() {
 
               <div style={{ display: 'flex' }}>
                 <div className={styles.back}>Backlog</div>
-                <img src={expand} className={styles.expand} onClick={()=>collapseAll()} alt='' />
+                <img src={expand} className={styles.expand} onClick={()=>collapseAll('backlog')} alt='' />
               </div>
 
               <div className={styles.displaytodotasks}>
@@ -511,7 +571,7 @@ export default function Home() {
               <div style={{ display: 'flex' }}>
                 <div className={styles.back}>To do</div>
                 <img src={add} className={styles.expand} style={{ marginLeft: '13vw' }} onClick={addcard} alt='' />
-                <img src={expand} className={styles.expand} style={{ marginLeft: '1.5vw' }} alt='' />
+                <img src={expand} className={styles.expand} style={{ marginLeft: '1.5vw' }} onClick={()=>collapseAll('todo')} alt='' />
               </div>
 
               <div className={styles.displaytodotasks}>
@@ -630,7 +690,7 @@ export default function Home() {
 
               <div style={{ display: 'flex' }}>
                 <div className={styles.back} style={{ width: '10vw' }}>In progress</div>
-                <img src={expand} className={styles.expand} style={{ marginLeft: '8vw' }} alt='' />
+                <img src={expand} className={styles.expand} style={{ marginLeft: '8vw' }} onClick={()=>collapseAll('inprogress')} alt='' />
               </div>
 
               <div className={styles.displaytodotasks}>
@@ -749,7 +809,7 @@ export default function Home() {
 
               <div style={{ display: 'flex' }}>
                 <div className={styles.back}>Done</div>
-                <img src={expand} className={styles.expand} style={{ marginLeft: '15.5vw' }} alt='' />
+                <img src={expand} className={styles.expand} style={{ marginLeft: '15.5vw' }} onClick={()=>collapseAll('done')} alt='' />
               </div>
 
               <div className={styles.displaytodotasks}>
