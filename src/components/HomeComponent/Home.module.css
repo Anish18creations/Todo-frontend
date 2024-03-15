@@ -2,6 +2,19 @@
 
 body {
     cursor: default;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+::-webkit-scrollbar {
+    background: white;
+    width: 0.1vw;
+    height: 1.5vh;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #9CB7C5;
+    border-radius: 0.5rem;
 }
 
 .menu {
@@ -17,6 +30,21 @@ body {
     height: 100vh;
     left: 15vw;
     font-family: "Poppins", sans-serif;
+    overflow-y: auto;
+    overflow-x: auto;
+}
+
+.main::-webkit-scrollbar {
+    background-color: white;
+    width: 0.5rem;
+    height: 0.7rem;
+    border-radius: 0.5rem;
+    border: 0.06rem 0rem 0rem 0rem;
+}
+
+.main::-webkit-scrollbar-thumb {
+    background: #9CB7C5;
+    border-radius: 0.5rem;
 }
 
 .promanage {
@@ -114,7 +142,19 @@ body {
     overflow-y: auto;
     margin-left: 2vw;
     margin-top: 5vh;
-    scrollbar-width: thin;
+    padding-right: 0.4vw;
+}
+
+.displaytodotasks::-webkit-scrollbar {
+    background: #D6EAF4;
+    width: 1.5vw;
+    height: 1vh;
+}
+
+.displaytodotasks::-webkit-scrollbar-thumb {
+    background: #8DAAB9CC;
+    border-radius: 1rem;
+    border: 0.4vw solid #D6EAF4;
 }
 
 .container {
