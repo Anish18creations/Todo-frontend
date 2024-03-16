@@ -266,7 +266,7 @@ export default function Home() {
 
   const cardshare = (cardid) => {
 
-    const setlink = `http://localhost:3000/card-info/${cardid}`;
+    const setlink = `https://todo-frontend-amber-seven.vercel.app/${cardid}`;
     copy(setlink);
     toast('Link Copied', {
       duration: 2000,
