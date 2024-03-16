@@ -492,7 +492,9 @@ export default function Home() {
                                 }} onClick={() => openorclosepopup(task._id)}></div>
                               </div>
                               <div style={{ display: 'flex' }}>
-                                <div className={styles.title}>{task.title}</div>
+                                <div className={styles.title} /*onmou*/>
+                                  {task.title.length > 5 ? task.title.substring(0,4) : task.title}
+                                </div>
                                 <div className={styles.test} id={task._id} style={{ visibility: 'hidden' }}>
                                   <div className={styles.option}>Edit</div>
                                   <div className={styles.option} style={{ marginTop: '1vh' }} onClick={() => cardshare(task._id)}>Share</div><Toaster />
