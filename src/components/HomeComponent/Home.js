@@ -85,53 +85,51 @@ export default function Home() {
       settodotasks(response);
       localStorage.setItem('todotasks', JSON.stringify(response));
       let todolocalstorage = [];
-      response.map((item)=>{
+      response.map((item) => {
         todolocalstorage.push(item._id);
       })
-      localStorage.setItem('todolocalstorage',JSON.stringify(todolocalstorage));
+      localStorage.setItem('todolocalstorage', JSON.stringify(todolocalstorage));
     }
-    else
-    {
+    else {
       settodotasks(JSON.parse(localStorage.getItem('todotasks')));
       const todolocal = JSON.parse(localStorage.getItem('todotasks'));
       let todolocalstorage = [];
-      todolocal.map((item)=>{
+      todolocal.map((item) => {
         todolocalstorage.push(item._id);
       })
-      localStorage.setItem('todolocalstorage',JSON.stringify(todolocalstorage));
-    }  
+      localStorage.setItem('todolocalstorage', JSON.stringify(todolocalstorage));
+    }
 
-    if (localStorage.getItem('inprogresstasks'))
-    {
+    if (localStorage.getItem('inprogresstasks')) {
       setinprogresstasks(JSON.parse(localStorage.getItem('inprogresstasks')));
       const inprogresslocal = JSON.parse(localStorage.getItem('inprogresstasks'));
       let inprogresslocalstorage = [];
-      inprogresslocal.map((item)=>{
+      inprogresslocal.map((item) => {
         inprogresslocalstorage.push(item._id);
       })
-      localStorage.setItem('inprogresslocalstorage',JSON.stringify(inprogresslocalstorage));
+      localStorage.setItem('inprogresslocalstorage', JSON.stringify(inprogresslocalstorage));
     }
-      
-    if (localStorage.getItem('backlogtasks')){
+
+    if (localStorage.getItem('backlogtasks')) {
       setbacklogtasks(JSON.parse(localStorage.getItem('backlogtasks')));
       const backloglocal = JSON.parse(localStorage.getItem('backlogtasks'));
       let backloglocalstorage = [];
-      backloglocal.map((item)=>{
+      backloglocal.map((item) => {
         backloglocalstorage.push(item._id);
       })
-      localStorage.setItem('backloglocalstorage',JSON.stringify(backloglocalstorage));
+      localStorage.setItem('backloglocalstorage', JSON.stringify(backloglocalstorage));
     }
-      
-    if (localStorage.getItem('donetasks')){
+
+    if (localStorage.getItem('donetasks')) {
       setdonetasks(JSON.parse(localStorage.getItem('donetasks')));
       const donelocal = JSON.parse(localStorage.getItem('donetasks'));
       let donelocalstorage = [];
-      donelocal.map((item)=>{
+      donelocal.map((item) => {
         donelocalstorage.push(item._id);
       })
-      localStorage.setItem('donelocalstorage',JSON.stringify(donelocalstorage));
+      localStorage.setItem('donelocalstorage', JSON.stringify(donelocalstorage));
     }
-      
+
   }
 
   const todotoProgress = (i) => {
@@ -353,55 +351,63 @@ export default function Home() {
 
   }
 
-  const expandcollapsechecklist = (i,j) => {
+  const expandcollapsechecklist = (i, j) => {
     const d = document.getElementById(i).style.visibility;
     const e = document.getElementById(j);
-    if(d == 'hidden'){
+    if (d == 'hidden') {
       document.getElementById(i).style.visibility = 'visible';
-      document.getElementById(i).style.height = '15vh' ;
+      document.getElementById(i).style.height = '15vh';
       e.src = require('../../assets/images/collapseone.png');
     }
-    else{
+    else {
       document.getElementById(i).style.visibility = 'hidden';
-      document.getElementById(i).style.height = '0vh' ;
+      document.getElementById(i).style.height = '0vh';
       e.src = require('../../assets/images/expandone.png');
     }
   }
 
   const collapseAll = (i) => {
-    if(i == 'todo'){
+    if (i == 'todo') {
       const gettodo = JSON.parse(localStorage.getItem('todolocalstorage'));
-      gettodo.map((item)=>{
-      document.getElementById(item+"a").style.visibility = 'hidden';
-      document.getElementById(item+'a').style.height = '0vh'; 
-      document.getElementById(item+'b').src = require('../../assets/images/expandone.png');
-    })
+      gettodo.map((item) => {
+        document.getElementById(item + "a").style.visibility = 'hidden';
+        document.getElementById(item + 'a').style.height = '0vh';
+        document.getElementById(item + 'b').src = require('../../assets/images/expandone.png');
+      })
     }
-    else if(i == 'backlog'){
+    else if (i == 'backlog') {
       const getbacklog = JSON.parse(localStorage.getItem('backloglocalstorage'));
-      getbacklog.map((item)=>{
-      document.getElementById(item+"a").style.visibility = 'hidden';
-      document.getElementById(item+'a').style.height = '0vh'; 
-      document.getElementById(item+'b').src = require('../../assets/images/expandone.png');
-    })  
-    } 
-    else if(i == 'inprogress'){
+      getbacklog.map((item) => {
+        document.getElementById(item + "a").style.visibility = 'hidden';
+        document.getElementById(item + 'a').style.height = '0vh';
+        document.getElementById(item + 'b').src = require('../../assets/images/expandone.png');
+      })
+    }
+    else if (i == 'inprogress') {
       const getinprogress = JSON.parse(localStorage.getItem('inprogresslocalstorage'));
-      getinprogress.map((item)=>{
-      document.getElementById(item+"a").style.visibility = 'hidden';
-      document.getElementById(item+'a').style.height = '0vh'; 
-      document.getElementById(item+'b').src = require('../../assets/images/expandone.png');
-    })  
-    } 
-    else{
+      getinprogress.map((item) => {
+        document.getElementById(item + "a").style.visibility = 'hidden';
+        document.getElementById(item + 'a').style.height = '0vh';
+        document.getElementById(item + 'b').src = require('../../assets/images/expandone.png');
+      })
+    }
+    else {
       const getdone = JSON.parse(localStorage.getItem('donelocalstorage'));
-      getdone.map((item)=>{
-      document.getElementById(item+"a").style.visibility = 'hidden';
-      document.getElementById(item+'a').style.height = '0vh'; 
-      document.getElementById(item+'b').src = require('../../assets/images/expandone.png');
-    })  
+      getdone.map((item) => {
+        document.getElementById(item + "a").style.visibility = 'hidden';
+        document.getElementById(item + 'a').style.height = '0vh';
+        document.getElementById(item + 'b').src = require('../../assets/images/expandone.png');
+      })
     }
 
+  }
+
+  const showfulltitle = (i, j) => {
+    document.getElementById(i).innerHTML = j;
+  }
+
+  const showpartly = (i, j) => {
+    document.getElementById(i).innerHTML = j;
   }
 
   return (
@@ -451,7 +457,7 @@ export default function Home() {
 
               <div style={{ display: 'flex' }}>
                 <div className={styles.back}>Backlog</div>
-                <img src={expand} className={styles.expand} onClick={()=>collapseAll('backlog')} alt='' />
+                <img src={expand} className={styles.expand} onClick={() => collapseAll('backlog')} alt='' />
               </div>
 
               <div className={styles.displaytodotasks}>
@@ -492,8 +498,11 @@ export default function Home() {
                                 }} onClick={() => openorclosepopup(task._id)}></div>
                               </div>
                               <div style={{ display: 'flex' }}>
-                                <div className={styles.title} /*onmou*/>
-                                  {task.title.length > 5 ? task.title.substring(0,4) : task.title}
+                                <div className={styles.title} id={task._id + "c"}
+                                  onMouseOver={() => showfulltitle(task._id + "c", task.title)}
+                                  onMouseOut={() => showpartly(task._id + "c", task.title.substring(0, 9))}
+                                >
+                                  {task.title.length > 9 ? task.title.substring(0, 9) : task.title}
                                 </div>
                                 <div className={styles.test} id={task._id} style={{ visibility: 'hidden' }}>
                                   <div className={styles.option}>Edit</div>
@@ -507,9 +516,9 @@ export default function Home() {
                                   /{task.checklists.length})
                                 </div>
                                 <img src={require('../../assets/images/expandone.png')} id={task._id + "b"} style={{ marginLeft: '7vw', marginTop: '-7vh', width: '1.5rem', height: '1.5rem' }}
-                                onClick={()=>expandcollapsechecklist(task._id + "a",task._id + "b")} alt='' />
+                                  onClick={() => expandcollapsechecklist(task._id + "a", task._id + "b")} alt='' />
                               </div>
-                              <div className={styles.checklistdisplay} id={task._id + "a"} style={{visibility:'hidden',height:'0vh'}}>
+                              <div className={styles.checklistdisplay} id={task._id + "a"} style={{ visibility: 'hidden', height: '0vh' }}>
 
                                 {task.checklists.map((item, i) => (
                                   <>
@@ -573,7 +582,7 @@ export default function Home() {
               <div style={{ display: 'flex' }}>
                 <div className={styles.back}>To do</div>
                 <img src={add} className={styles.expand} style={{ marginLeft: '13vw' }} onClick={addcard} alt='' />
-                <img src={expand} className={styles.expand} style={{ marginLeft: '1.5vw' }} onClick={()=>collapseAll('todo')} alt='' />
+                <img src={expand} className={styles.expand} style={{ marginLeft: '1.5vw' }} onClick={() => collapseAll('todo')} alt='' />
               </div>
 
               <div className={styles.displaytodotasks}>
@@ -614,7 +623,12 @@ export default function Home() {
                                 }} onClick={() => openorclosepopup(task._id)}></div>
                               </div>
                               <div style={{ display: 'flex' }}>
-                                <div className={styles.title}>{task.title}</div>
+                                <div className={styles.title} id={task._id + "c"}
+                                  onMouseOver={() => showfulltitle(task._id + "c", task.title)}
+                                  onMouseOut={() => showpartly(task._id + "c", task.title.substring(0, 9))}
+                                >
+                                  {task.title.length > 9 ? task.title.substring(0, 9) : task.title}
+                                </div>
                                 <div className={styles.test} id={task._id} style={{ visibility: 'hidden', left: '9vw' }}>
                                   <div className={styles.option}>Edit</div>
                                   <div className={styles.option} style={{ marginTop: '1vh' }} onClick={() => cardshare(task._id)}>Share</div><Toaster />
@@ -627,9 +641,9 @@ export default function Home() {
                                   /{task.checklists.length})
                                 </div>
                                 <img src={require('../../assets/images/expandone.png')} id={task._id + "b"} style={{ marginLeft: '7vw', marginTop: '-7vh', width: '1.5rem', height: '1.5rem' }}
-                                onClick={()=>expandcollapsechecklist(task._id + "a",task._id + "b")} alt='' />
+                                  onClick={() => expandcollapsechecklist(task._id + "a", task._id + "b")} alt='' />
                               </div>
-                              <div className={styles.checklistdisplay} id={task._id + "a"} style={{visibility:'hidden',height:'0vh'}}>
+                              <div className={styles.checklistdisplay} id={task._id + "a"} style={{ visibility: 'hidden', height: '0vh' }}>
 
                                 {task.checklists.map((item, i) => (
                                   <>
@@ -692,7 +706,7 @@ export default function Home() {
 
               <div style={{ display: 'flex' }}>
                 <div className={styles.back} style={{ width: '10vw' }}>In progress</div>
-                <img src={expand} className={styles.expand} style={{ marginLeft: '8vw' }} onClick={()=>collapseAll('inprogress')} alt='' />
+                <img src={expand} className={styles.expand} style={{ marginLeft: '8vw' }} onClick={() => collapseAll('inprogress')} alt='' />
               </div>
 
               <div className={styles.displaytodotasks}>
@@ -733,7 +747,12 @@ export default function Home() {
                                 }} onClick={() => openorclosepopup(task._id)}></div>
                               </div>
                               <div style={{ display: 'flex' }}>
-                                <div className={styles.title}>{task.title}</div>
+                                <div className={styles.title} id={task._id + "c"}
+                                  onMouseOver={() => showfulltitle(task._id + "c", task.title)}
+                                  onMouseOut={() => showpartly(task._id + "c", task.title.substring(0, 9))}
+                                >
+                                  {task.title.length > 9 ? task.title.substring(0, 9) : task.title}
+                                </div>
                                 <div className={styles.test} id={task._id} style={{ visibility: 'hidden', left: '9vw' }}>
                                   <div className={styles.option}>Edit</div>
                                   <div className={styles.option} style={{ marginTop: '1vh' }} onClick={() => cardshare(task._id)}>Share</div><Toaster />
@@ -746,9 +765,9 @@ export default function Home() {
                                   /{task.checklists.length})
                                 </div>
                                 <img src={require('../../assets/images/expandone.png')} id={task._id + "b"} style={{ marginLeft: '7vw', marginTop: '-7vh', width: '1.5rem', height: '1.5rem' }}
-                                onClick={()=>expandcollapsechecklist(task._id + "a",task._id + "b")} alt='' />
+                                  onClick={() => expandcollapsechecklist(task._id + "a", task._id + "b")} alt='' />
                               </div>
-                              <div className={styles.checklistdisplay} id={task._id + "a"} style={{visibility:'hidden',height:'0vh'}}>
+                              <div className={styles.checklistdisplay} id={task._id + "a"} style={{ visibility: 'hidden', height: '0vh' }}>
 
                                 {task.checklists.map((item, i) => (
                                   <>
@@ -811,7 +830,7 @@ export default function Home() {
 
               <div style={{ display: 'flex' }}>
                 <div className={styles.back}>Done</div>
-                <img src={expand} className={styles.expand} style={{ marginLeft: '15.5vw' }} onClick={()=>collapseAll('done')} alt='' />
+                <img src={expand} className={styles.expand} style={{ marginLeft: '15.5vw' }} onClick={() => collapseAll('done')} alt='' />
               </div>
 
               <div className={styles.displaytodotasks}>
@@ -852,7 +871,12 @@ export default function Home() {
                                 }} onClick={() => openorclosepopup(task._id)}></div>
                               </div>
                               <div style={{ display: 'flex' }}>
-                                <div className={styles.title}>{task.title}</div>
+                                <div className={styles.title} id={task._id + "c"}
+                                  onMouseOver={() => showfulltitle(task._id + "c", task.title)}
+                                  onMouseOut={() => showpartly(task._id + "c", task.title.substring(0, 9))}
+                                >
+                                  {task.title.length > 9 ? task.title.substring(0, 9) : task.title}
+                                </div>
                                 <div className={styles.test} id={task._id} style={{ visibility: 'hidden', left: '9vw' }}>
                                   <div className={styles.option}>Edit</div>
                                   <div className={styles.option} style={{ marginTop: '1vh' }} onClick={() => cardshare(task._id)}>Share</div><Toaster />
@@ -865,9 +889,9 @@ export default function Home() {
                                   /{task.checklists.length})
                                 </div>
                                 <img src={require('../../assets/images/expandone.png')} id={task._id + "b"} style={{ marginLeft: '7vw', marginTop: '-7vh', width: '1.5rem', height: '1.5rem' }}
-                                onClick={()=>expandcollapsechecklist(task._id + "a",task._id + "b")} alt='' />
+                                  onClick={() => expandcollapsechecklist(task._id + "a", task._id + "b")} alt='' />
                               </div>
-                              <div className={styles.checklistdisplay} id={task._id + "a"} style={{visibility:'hidden',height:'0vh'}}>
+                              <div className={styles.checklistdisplay} id={task._id + "a"} style={{ visibility: 'hidden', height: '0vh' }}>
 
                                 {task.checklists.map((item, i) => (
                                   <>
