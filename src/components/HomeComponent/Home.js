@@ -7,6 +7,7 @@ import analytics from '../../assets/images/analytics.png';
 import expand from '../../assets/images/expand.png';
 import add from '../../assets/images/add.png';
 import logout from '../../assets/images/Logout.png';
+import downfilter from '../../assets/images/filterdown.png';
 import AddCard from '../AddCardComponent/AddCard';
 import Logout from '../LogoutComponent/Logout';
 import Deletecard from '../DeleteComponent/Deletecard';
@@ -410,6 +411,21 @@ export default function Home() {
     document.getElementById(i).innerHTML = j;
   }
 
+  const popup = () => {
+
+    const i = document.getElementById('filter').style.visibility;
+    if(i == 'hidden')
+    document.getElementById('filter').style.visibility = 'visible';
+    else
+    document.getElementById('filter').style.visibility = 'hidden';
+  }
+
+  const filterchoice = (i) => {
+    document.getElementById('userchoice').innerHTML = i;
+    document.getElementById('filter').style.visibility = 'hidden';
+    //api call for filters 
+  }
+
   return (
     <>
       <div style={{ display: 'flex' }}>
@@ -450,6 +466,18 @@ export default function Home() {
           </div>
 
           <div className={styles.boardtxt}>Board</div>
+          <div className={styles.filter}>
+            <div id='userchoice'>This Week</div>
+            <img src={downfilter} alt='' 
+            style={{marginLeft:'0.5vw' , width:'1.1vw' , height:'1.2vh' , marginTop:'1.6vh'}}
+            onClick={()=>popup()} />
+          </div>
+          <div className={styles.filterdropdown} id='filter' style={{visibility:'hidden'}}>
+            <div className={styles.filteroptions} style={{marginTop:'3vh'}} 
+            onClick={()=>filterchoice('Today')}>Today</div>
+            <div className={styles.filteroptions} onClick={()=>filterchoice('This Week')}>This Week</div>
+            <div className={styles.filteroptions} onClick={()=>filterchoice('This Month')}>This Month</div>
+          </div>
 
           <div style={{ display: 'flex' }}>
 
@@ -500,9 +528,11 @@ export default function Home() {
                               <div style={{ display: 'flex' }}>
                                 <div className={styles.title} id={task._id + "c"}
                                   onMouseOver={() => showfulltitle(task._id + "c", task.title)}
-                                  onMouseOut={() => showpartly(task._id + "c", task.title.substring(0, 9))}
+                                  onMouseOut={() => showpartly(task._id + "c",
+                                  (task.title.length > 9 ? task.title.substring(0, 9) + "..." : task.title))
+                              }
                                 >
-                                  {task.title.length > 9 ? task.title.substring(0, 9) : task.title}
+                                  {task.title.length > 9 ? task.title.substring(0, 9) + "..." : task.title}
                                 </div>
                                 <div className={styles.test} id={task._id} style={{ visibility: 'hidden' }}>
                                   <div className={styles.option}>Edit</div>
